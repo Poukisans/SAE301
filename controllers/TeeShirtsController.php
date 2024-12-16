@@ -17,15 +17,26 @@ class TeeShirtsController extends Controller
                 throw new Exception('Page not found');
             }
 
-            if (isset($url[1]) && !empty($url[1])) {
-                $this->pageCategory($url[0], $url[1]);
+            //Vérifié si la catégorie est valide
+            if (isset($url[1]) && !in_array($url[1], ['homme', 'femme', 'enfant'])) {
+                header('Location: ' . BASE_URL . 'tee-shirts');
+                exit;
+            }
+
+            if (isset($url[1]) && !empty($url[1]) && isset($url[2]) && !empty($url[2])) {
+                $this->pageArticle($url[0], $url[1], $url[2]); //Page Article
+
+            } elseif (isset($url[1]) && !empty($url[1])) {
+                $this->pageCategory($url[0], $url[1]); //Page tee-shirts catégorie
+
             } else {
-                $this->page($url[0]);
+                $this->page($url[0]); //Page tee-shirts sans catégorie
             }
         } else {
             throw new Exception('Page not found');
         }
     }
+
 
     private function page($url)
     {
@@ -49,7 +60,7 @@ class TeeShirtsController extends Controller
 
         // ====== Contenu de la page ======
         $this->articleModel = new ArticleModel();
-        $articleList = $this->articleModel->getList();
+        $articleList = $this->articleModel->getListCategory($categorie);
 
         $this->_view = new View("views/" . $url . ".php", [
             'layoutContent' => $this->layoutContent,
@@ -57,14 +68,21 @@ class TeeShirtsController extends Controller
         ]);
     }
 
-    private function pageCategory($url, $categorie)
+    private function pageArticle($url, $categorie, $article)
     {
         $this->articleModel = new ArticleModel();
 
+        // Vérifier si l'article existe
         try {
-            $filmInfo = $this->filmModel->getInfo($film); // Récupérer les informations du film
+            $articleInfo = $this->articleModel->getInfo($article);
         } catch (Exception $e) {
-            header("Location: ./");
+            header('Location: ' . BASE_URL . 'tee-shirts/' . $categorie);
+            exit;
+        }
+
+        //vérification catégorie de l'article
+        if ($articleInfo['categorie'] != $categorie) {
+            header('Location: ' . BASE_URL . 'tee-shirts/' . $categorie);
             exit;
         }
 
@@ -72,8 +90,8 @@ class TeeShirtsController extends Controller
         if ($articleInfo['affichage'] == 0) {
             session_start();
             if (!Auth::isLoggedIn()) {
-                header("Location: ./");
-                exit();
+                header('Location: ' . BASE_URL . 'tee-shirts');
+                exit;
             } else {
                 $previewInfo = "Mode prévisualisation. Cette page n'a pas encore été publiée.";
             }
@@ -81,18 +99,13 @@ class TeeShirtsController extends Controller
             $previewInfo = null;
         }
 
-        $filmId = $filmInfo['id'];
-
         // ====== Contenu spécifique du layout ======
         $this->layoutContent = $this->getLayoutContent($url); // Récupérer le contenu général
-
-        $this->layoutContent['banner'] = $filmInfo['banner'];
-        $this->layoutContent['meta_desc'] = $filmInfo['synopsis'];
-        $this->layoutContent['current_section'] = $filmInfo['nom'];
 
         $this->_view = new View("views/" . $url . "_content.php", [
             'layoutContent' => $this->layoutContent,
             'previewInfo' => $previewInfo,
+            'articleInfo' => $articleInfo,
         ]);
     }
 }

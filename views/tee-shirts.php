@@ -3,7 +3,7 @@ foreach ($articleList as $content) {
 ?>
     <div>
         <img src=".<?= $content['miniature'] ?>" style="width: 30px;">
-        <a href="<?= $content['categorie'] ?>/<?= $content['lien'] ?>"><?= $content['nom'] ?></a>
+        <a href="tee-shirts/<?= $content['categorie'] ?>/<?= $content['lien'] ?>"><?= $content['nom'] ?></a>
         <p><?= number_format($content['prix'],2) ?> €</p>
         <?php
         if (!empty($content['rabais'])) {
