@@ -111,9 +111,9 @@
                             <div class="d-flex flex-column justify-content-end mx-3 mb-2 flex-fill">
                                 <label for="categorie">Catégorie</label>
                                 <select name="categorie" class="form-control" required>
-                                    <option value="1" <?= $articleInfo['categorie'] == 1 ? "selected" : "" ?>>Homme</option>
-                                    <option value="2" <?= $articleInfo['categorie'] == 2 ? "selected" : "" ?>>Femme</option>
-                                    <option value="3" <?= $articleInfo['categorie'] == 3 ? "selected" : "" ?>>Enfant</option>
+                                    <option value="homme" <?= $articleInfo['categorie'] == "homme" ? "selected" : "" ?>>Homme</option>
+                                    <option value="femme" <?= $articleInfo['categorie'] == "femme" ? "selected" : "" ?>>Femme</option>
+                                    <option value="enfant" <?= $articleInfo['categorie'] == "enfant" ? "selected" : "" ?>>Enfant</option>
                                 </select>
                             </div>
 
