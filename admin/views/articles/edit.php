@@ -3,7 +3,7 @@
     <!-- ================== BOUTONS ACTIONS ================== -->
     <div class="my-3 d-flex flex-row justify-content-end">
         <!-- Acceder a -->
-        <a href="/articles/<?= $articleInfo['lien'] ?>" role="button" target="_blank" class="btn btn-primary h-100"> <i class="fas fa-external-link-alt mx-1"></i> &nbsp; Voir la page</a>
+        <a href="<?=BASE_URL?>articles/<?= $articleInfo['lien'] ?>" role="button" target="_blank" class="btn btn-primary h-100"> <i class="fas fa-external-link-alt mx-1"></i> &nbsp; Voir la page</a>
 
         <!-- Show/hide -->
         <form action="articles/<?= $articleInfo['lien'] ?>" method="POST" class="align-items-center justify-content-center d-flex mx-1">
@@ -64,7 +64,7 @@
                             <?php
                             if (!empty($articleInfo['miniature'])) {
                             ?>
-                                <img src="<?= $articleInfo['miniature'] ?>" class="w-100 h-auto">
+                                <img src="<?=BASE_URL?><?= $articleInfo['miniature'] ?>" class="w-100 h-auto">
                             <?php
                             } else {
                             ?>
@@ -167,43 +167,9 @@
             <?php
             foreach ($articleColorisList as $content) {
             ?>
-                <div class="row w-100 mb-2">
+                
 
-                    <form action="productions" method="post" class="d-flex flex-row flex-fill">
-
-                        <div class="col-xs-12 col-sm-6 col-md-6 d-flex flex-column justify-content-start">
-                            <input name="nom" value="<?= $content['nom'] ?>" required class="form-control" type="text">
-                        </div>
-
-                        <div class="col-xs-12 col-sm-5 col-md-5 d-flex flex-column justify-content-start">
-                            <input disabled class="form-control" type="text" style="background-color: <?= $content['coloris'] ?>;">
-                        </div>
-
-                        <div class="col-xs-12 col-sm-1 col-md-1 d-flex justify-content-between align-items-end">
-                            <button type="button" class="btn btn-danger w-100" data-toggle="modal" data-target="#deleteColoris<?= $content['id'] ?>">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </form>
-
-                    <!-- Modal suppression -->
-                    <form action="articles/<?= $articleInfo['lien'] ?>" method="POST" class="align-items-center justify-content-center d-flex">
-                        <div id="deleteColoris<?= $content['id'] ?>" class="modal fade" tabindex="-1" aria-labelledby="deleteColoris<?= $content['id'] ?>" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        Êtes-vous sûr de vouloir supprimer la couleur <b><?= $content['nom'] ?></b> ? <br> <br>
-                                    </div>
-                                    <div class="modal-footer d-flex justify-content-end">
-                                        <div>
-                                            <button name="deleteColoris" value="<?= $content['id'] ?>" type="submit" class="btn btn-danger w-100">Supprimer</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                
             <?php
             }
             ?>
@@ -273,8 +239,8 @@
             foreach ($articlePhotoList as $content) {
             ?>
                 <div class="card m-3" style="width: 18rem;">
-                    <a class="d-flex justify-content-center align-items-center border bg-light" target="_blank" href="<?= $content['img_article'] ?>">
-                        <img src="<?= $content['img_article'] ?>" class="img-fluid" style="height: 18rem; object-fit:contain;">
+                    <a class="d-flex justify-content-center align-items-center border bg-light" target="_blank" href="<?=BASE_URL?><?= $content['img_article'] ?>">
+                        <img src="<?=BASE_URL?><?= $content['img_article'] ?>" class="img-fluid" style="height: 18rem; object-fit:contain;">
                     </a>
                     <div class="p-3 d-flex align-items-center justify-content-center bg-light elevation-1">
                         <!-- Suppression -->
@@ -288,7 +254,7 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-body d-flex flex-column">
-                                            <img src="<?= $content['img_article'] ?>" class="img-fluid my-3">
+                                            <img src="<?=BASE_URL?><?= $content['img_article'] ?>" class="img-fluid my-3">
                                             Êtes-vous sûr de vouloir supprimer cette photo ? <br><br>
                                             <b>Cette action est irréversible.</b>
                                         </div>

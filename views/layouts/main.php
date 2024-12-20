@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="<?= $layoutContent['meta_desc'] ?>">
 
-    <base href=<?= BASE_URL ?>>
+    <base href="<?=BASE_URL?>">
 
     <link rel="stylesheet" href="assets/css/anim.css">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -36,7 +36,7 @@
             </div>
 
             <h1 class="logo" id="logo">
-                <a href="/">
+                <a href="./">
                     <img class="logo_classic" src="assets/logo/logo_mezzanotte34.svg" alt="<?=SITE_NAME?>" aria-label="Logo <?=SITE_NAME?>">
                     <img class="logo_mobile" src="assets/logo/logo_mezzanotte34_mini.svg" alt="<?=SITE_NAME?>" aria-label="Logo <?=SITE_NAME?>">
                 </a>
