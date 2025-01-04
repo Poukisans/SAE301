@@ -5,7 +5,7 @@ class FileManager
     //=============== CREER DOSSIER ===============
     private function createDir($path)
     {
-        $serverPath = $_SERVER['DOCUMENT_ROOT'] . $path;
+        $serverPath = $_SERVER['DOCUMENT_ROOT']. BASE_URL . $path;
         if (!file_exists($serverPath)) {
             if (!mkdir($serverPath, 0751, true)) { // `true` pour création récursive
                 throw new Exception("Erreur lors de la création du dossier : $serverPath");
@@ -16,7 +16,7 @@ class FileManager
     //=============== SUPPRIMER FICHIER ===============
     public function deleteFile($path)
     {
-        $serverPath = $_SERVER['DOCUMENT_ROOT'] . $path;
+        $serverPath = $_SERVER['DOCUMENT_ROOT']. BASE_URL . $path;
     
         // Si le fichier n'existe pas ou n'est pas un fichier, quitter la fonction sans erreur
         if (!file_exists($serverPath) || !is_file($serverPath)) {
@@ -33,7 +33,7 @@ class FileManager
     //=============== DEPLACER FICHIER ===============
     public function moveFile($file_tmp, $path, $file_name)
     {
-        $serverPath = $_SERVER['DOCUMENT_ROOT'] . $path;
+        $serverPath = $_SERVER['DOCUMENT_ROOT']. BASE_URL . $path;
         // Vérifie si le répertoire existe, sinon le crée avec des permissions appropriées
         if (!is_dir($serverPath)) {
             $this->createDir($path);
@@ -50,7 +50,7 @@ class FileManager
     //=============== SUPPRIMER DOSSIER ET CONTENU ===============
     public function deleteDir($path)
     {
-        $serverPath = $_SERVER['DOCUMENT_ROOT'] . $path;
+        $serverPath = $_SERVER['DOCUMENT_ROOT']. BASE_URL . $path;
         if (!is_dir($serverPath)) {
             return; // Quitte si $path n'est pas un dossier
         }
