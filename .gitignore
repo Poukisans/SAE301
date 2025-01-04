@@ -2,3 +2,4 @@
 .gitattributes
 assets/img/**
 config.php
+public/**
