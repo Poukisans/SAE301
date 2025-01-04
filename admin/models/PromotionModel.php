@@ -14,7 +14,7 @@ class PromotionModel extends Model
     // ==================================== LISTE ====================================
     public function getInfo()
     {
-        $sql = "SELECT * FROM `promotions`";
+        $sql = "SELECT * FROM `b_promotions`";
         $statment = $this->executerRequete($sql);
         return $statment->fetch(PDO::FETCH_ASSOC);
     }

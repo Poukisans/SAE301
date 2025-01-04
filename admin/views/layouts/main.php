@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Panel | <?=SITE_NAME?></title>
-  <base href="<?=BASE_URL?>admin/">
+  <title>Panel | <?= SITE_NAME ?></title>
+  <base href="<?= BASE_URL ?>admin/">
 
   <meta name="robots" content="noindex, nofollow, noimageindex, nosnippet">
 
@@ -13,7 +13,7 @@
   <link rel="icon" type="image/svg+xml" href="dist/favicon/favicon.svg" />
   <link rel="shortcut icon" href="dist/favicon/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="./dist/favicon/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Panel | <?=SITE_NAME?>" />
+  <meta name="apple-mobile-web-app-title" content="Panel | <?= SITE_NAME ?>" />
   <link rel="manifest" href="dist/favicon/site.webmanifest" />
 
   <!-- Google Font: Source Sans Pro -->
@@ -133,7 +133,7 @@
             <!-- article -->
             <li class="nav-item">
               <a href="./articles" class="nav-link <?= $currentContent == "article" ? "active" : "" ?>">
-              <i class="fas fa-tshirt nav-icon"></i>
+                <i class="fas fa-tshirt nav-icon"></i>
                 <p>Articles</p>
               </a>
             </li>
@@ -141,7 +141,7 @@
             <!-- promotion -->
             <li class="nav-item">
               <a href="./promotions" class="nav-link <?= $currentContent == "promotion" ? "active" : "" ?>">
-              <i class="fas fa-tags nav-icon"></i>
+                <i class="fas fa-tags nav-icon"></i>
                 <p>Promotions</p>
               </a>
             </li>
@@ -149,7 +149,7 @@
             <!-- commande -->
             <li class="nav-item">
               <a href="./commandes" class="nav-link <?= $currentContent == "commande" ? "active" : "" ?>">
-                <i class="fas fa-camera nav-icon"></i>
+                <i class="fas fa-truck-loading nav-icon"></i>
                 <p>Commandes</p>
               </a>
             </li>
@@ -169,7 +169,7 @@
 
     <!-- Main Footer -->
     <footer class="main-footer">
-      <strong>© <?=SITE_NAME?></strong> Tous droits réservés.
+      <strong>© <?= SITE_NAME ?></strong> Tous droits réservés.
     </footer>
   </div>
   <!-- ./wrapper -->

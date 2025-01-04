@@ -6,7 +6,7 @@ class ArticleModel extends Model
     // ==================================== LISTE ====================================
     public function getList()
     {
-        $sql = "SELECT id, nom, prix, miniature, affichage, lien FROM b_articles";
+        $sql = "SELECT id, nom, prix, miniature, affichage, lien FROM b_articles ORDER BY id DESC";
         $statment = $this->executerRequete($sql);
         return $statment->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -15,8 +15,32 @@ class ArticleModel extends Model
     public function getInfo($content)
     {
         $sql = "SELECT * FROM b_articles WHERE lien = :lien";
-        $statement = $this->executerRequete($sql, [':lien' => $content]);
-        return $statement->fetch(PDO::FETCH_ASSOC);
+        $statment = $this->executerRequete($sql, [':lien' => $content]);
+
+        $content = $statment->fetch(PDO::FETCH_ASSOC);
+
+        if (!$content) {
+            throw new Exception("404 Not Found : Article inconnu.");
+        }
+
+        return $content;
+    }
+
+    // ==================================== AJOUT ====================================
+    public function add($data)
+    {
+        extract($data);
+
+        try {
+            $sql = "INSERT INTO b_articles (nom, categorie, lien) VALUES (:nom, :categorie, :lien)";
+            $this->executerRequete($sql, [
+                ':nom' => $nom,
+                ':categorie' => $categorie,
+                ':lien' => $lien,
+            ]);
+        } catch (PDOException $e) {
+            throw new Exception("Erreur lors de la mise à jour en BDD: " . $e->getMessage());
+        }
     }
 
     // ==================================== UPDATE INFO ====================================

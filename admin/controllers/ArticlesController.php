@@ -18,7 +18,7 @@ class ArticlesController extends Controller
         parent::__construct(); // Appeler le constructeur de la classe parente pour initialiser les informations générales
         $this->layoutContent = $this->getLayoutContent();
 
-        $this->FilePath = "/public/articles/";
+        $this->FilePath = "public/articles/";
 
         if ($url[0] === "articles") {
             if (count($url) > 2) {
@@ -61,7 +61,12 @@ class ArticlesController extends Controller
 
     private function pageAction($url, $content)
     {
-        $articleInfo = $this->articleModel->getInfo($content); // Récupérer les informations 
+        try {
+            $articleInfo = $this->articleModel->getInfo($content); // Récupérer les informations 
+        } catch (Exception $e) {
+            header("Location: ./");
+            exit;
+        }
         $id_content = $articleInfo['id'];
 
         $articlePhotoList = $this->articlePhotoModel->getList($id_content); // Récupérer les images 
@@ -80,6 +85,25 @@ class ArticlesController extends Controller
 
     private function handlePostRequest()
     {
+        //Ajout film
+        if (isset($_POST['add'], $_POST['nom'], $_POST['categorie'])) {
+            $data = [
+                'nom' => $_POST['nom'],
+                'categorie' => $_POST['categorie'],
+                //'lien' => preg_replace('/[^a-z0-9-]/', '', str_replace([' ', '/'], '-', strtolower(transliterator_transliterate('Any-Latin; Latin-ASCII', $_POST['nom']))))
+                'lien' => preg_replace('/[^a-z0-9-]/', '', str_replace([' ', '/'], '-', strtolower(iconv('UTF-8', 'ASCII//TRANSLIT', $_POST['nom']))))
+            ];
+            try {
+                $this->articleModel->add($data);
+                $newLien = $data['lien'];
+                $_SESSION['successMsg'] = "L'article' a bien été ajouté.";
+                header("Location: $newLien");
+                exit;
+            } catch (Exception $e) {
+                $_SESSION['errorMsg'] = "Erreur : " . $e->getMessage();
+            }
+        }
+
         // Mise à jour de la miniature
         if (isset($_POST['update'], $_FILES['miniature'], $_POST['miniature']) && $_FILES['miniature']['error'] === UPLOAD_ERR_OK) {
 
@@ -116,7 +140,8 @@ class ArticlesController extends Controller
                 'categorie' => $_POST['categorie'],
                 'description' => $_POST['description'],
                 //Formatage nom article pour maj lien
-                'lien' => preg_replace('/[^a-z0-9-]/', '', str_replace([' ', '/'], '-', strtolower(transliterator_transliterate('Any-Latin; Latin-ASCII', $_POST['nom'])))),
+                //'lien' => preg_replace('/[^a-z0-9-]/', '', str_replace([' ', '/'], '-', strtolower(transliterator_transliterate('Any-Latin; Latin-ASCII', $_POST['nom'])))),
+                'lien' => preg_replace('/[^a-z0-9-]/', '', str_replace([' ', '/'], '-', strtolower(iconv('UTF-8', 'ASCII//TRANSLIT', $_POST['nom']))))
 
             ];
             try {
@@ -161,6 +186,32 @@ class ArticlesController extends Controller
             }
         }
 
+        // MAJ stocks
+        if (isset($_POST['updateStock'], $_POST['quantite'])) {
+            $quantiteData = $_POST['quantite']; // Récupérer les données des quantités depuis le formulaire
+
+            try {
+                // Validation des données (optionnelle mais recommandée)
+                foreach ($quantiteData as $id => $quantites) {
+                    foreach ($quantites as $taille => $valeur) {
+                        if (!is_numeric($valeur) || $valeur < 0) {
+                            throw new Exception("Les quantités doivent être des nombres positifs.");
+                        }
+                    }
+                }
+
+                // Appeler le modèle pour mettre à jour les quantités
+                $this->articleColorisModel->updateStock($quantiteData);
+
+                // Message de succès pour la session
+                $_SESSION['successMsg'] = "Les stocks ont été mis à jour avec succès.";
+            } catch (Exception $e) {
+                // En cas d'erreur, stocker le message d'erreur dans la session
+                $_SESSION['errorMsg'] = "Erreur : " . $e->getMessage();
+            }
+        }
+
+
         // Ajout coloris
         if (isset($_POST['addColoris'], $_POST['nom'], $_POST['coloris'])) {
 
@@ -178,6 +229,23 @@ class ArticlesController extends Controller
             }
         }
 
+        // MAJ coloris
+        if (isset($_POST['updateColoris'], $_POST['nom'], $_POST['coloris'])) {
+
+            $data = [
+                'id' => $_POST['updateColoris'],
+                'nom' => $_POST['nom'],
+                'coloris' => $_POST['coloris'],
+            ];
+            try {
+                //Modifie l'entrée BDD
+                $this->articleColorisModel->update($data);
+                $_SESSION['successMsg'] = "Le coloris a bien été mis à jour"; //Output
+            } catch (Exception $e) {
+                $_SESSION['errorMsg'] = "Erreur : " . $e->getMessage();
+            }
+        }
+
         // Suppression coloris
         if (isset($_POST['deleteColoris'])) {
 
@@ -186,7 +254,7 @@ class ArticlesController extends Controller
             try {
                 //Modifie l'entrée BDD
                 $this->articleColorisModel->delete($id);
-                $_SESSION['successMsg'] = "Le coloris a bien été ajouté"; //Output
+                $_SESSION['warnMsg'] = "Le coloris a bien été supprimé"; //Output
             } catch (Exception $e) {
                 $_SESSION['errorMsg'] = "Erreur : " . $e->getMessage();
             }
