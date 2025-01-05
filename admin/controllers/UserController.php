@@ -6,11 +6,13 @@ class UserController extends Controller
 {
     private $_view;
     private $login;
+    private $layoutContent;
     private $adminModel;
 
     public function __construct($url)
     {
         parent::__construct($url[0]); // Appeler le constructeur de la classe parente pour initialiser les informations générales
+        $this->layoutContent = $this->getLayoutContent();
 
         $this->adminModel =  new AdminModel;
         if ($url[0] == "user") {
@@ -28,6 +30,7 @@ class UserController extends Controller
     private function page($url)
     {
         $this->_view = new View("views/" . $url . ".php", [
+            'layoutContent' => $this->layoutContent,
             'currentPage' => 'Utilisateur',
             'currentContent' => "utilisateur",
         ]);
