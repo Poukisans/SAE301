@@ -6,7 +6,7 @@
     </div>
 
     <!-- ================== LISTE ================== -->
-    <div class="card card-primary color-palette-box">
+    <div class="card card-secondary color-palette-box">
 
         <!-- Titre carte -->
         <div class="card-header">

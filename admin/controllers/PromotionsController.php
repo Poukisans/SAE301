@@ -46,7 +46,7 @@ class PromotionsController extends Controller
             'layoutContent' => $this->layoutContent,
             'currentPage' => ucwords($url),
             'currentContent' => ("promotion"),
-            'promotionList' => $promotionList
+            'promotionList' => $promotionList,
         ]);
     }
 
@@ -57,7 +57,7 @@ class PromotionsController extends Controller
         $this->_view = new View("views/" . $url . "/edit.php", [
             'layoutContent' => $this->layoutContent,
             'currentPage' => '<a href="./' . $url . '">' . ucwords($url) . '</a> - ' . $promotionInfo['nom'],
-            'currentContent' => ("article"),
+            'currentContent' => ("promotion"),
             'promotionInfo' => $promotionInfo,
         ]);
     }

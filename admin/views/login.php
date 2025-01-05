@@ -29,7 +29,7 @@
 <body class="hold-transition login-page">
   <div class="login-box">
     <div class="login-logo">
-      <a href="../"><img src="dist/img/logo_mezzanotte34.svg" alt=""></a>
+      <a href="../"><img src="dist/img/logo.svg" alt=""></a>
     </div>
     <!-- /.login-logo -->
     <div class="card">
@@ -53,7 +53,7 @@
             </div>
           </div>
           <div class="row">
-            <button type="submit" class="btn btn-success btn-block">Connexion</button>
+            <button type="submit" class="btn btn-danger btn-block">Connexion</button>
           </div>
           <div class="row d-flex align-items-center">
             <?php

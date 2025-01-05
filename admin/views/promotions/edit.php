@@ -33,7 +33,7 @@
     <div class="container d-flex flex-rox flexwrap">
 
     </div>
-    <div class="card card-success color-palette-box">
+    <div class="card card-secondary color-palette-box">
 
         <!-- Titre carte -->
         <div class="card-header">

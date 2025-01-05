@@ -43,7 +43,7 @@
     </div>
 
     <!-- ================== MODIFICATIONS ================== -->
-    <div class="card card-lime color-palette-box">
+    <div class="card card-secondary color-palette-box">
         <!-- Titre carte -->
 
         <div class="card-header">
@@ -127,7 +127,7 @@
 
                         <div class="d-flex flex-row-reverse justify-content-between align-items-center d-flex mt-3">
                             <div class="d-flex flex-column mx-3 justify-content-center">
-                                <button name="update" value="<?= $articleInfo['id'] ?>" class="btn bg-lime" type="submit"><i class="fas fa-sync-alt"></i></i> &nbsp; Mettre à jour</button>
+                                <button name="update" value="<?= $articleInfo['id'] ?>" class="btn btn-success" type="submit"><i class="fas fa-sync-alt"></i></i> &nbsp; Mettre à jour</button>
                             </div>
                         </div>
                     </div>
@@ -138,7 +138,7 @@
     <!-- Fin carte -->
 
     <!-- ================== GESTION STOCK ================== -->
-    <div class="card card-indigo color-palette-box">
+    <div class="card card-danger color-palette-box">
         <!-- Titre carte -->
 
         <div class="card-header">
@@ -191,7 +191,7 @@
 
                     <div class="d-flex flex-row-reverse justify-content-between align-items-center d-flex mt-3">
                         <div class="d-flex flex-column mx-3 justify-content-center">
-                            <button name="updateStock" value="<?= $articleInfo['id'] ?>" class="btn bg-lime" type="submit"><i class="fas fa-sync-alt"></i></i> &nbsp; Mettre à jour</button>
+                            <button name="updateStock" value="<?= $articleInfo['id'] ?>" class="btn btn-success" type="submit"><i class="fas fa-sync-alt"></i></i> &nbsp; Mettre à jour</button>
                         </div>
                     </div>
                 </form>
@@ -212,7 +212,7 @@
     <!-- Fin carte -->
 
     <!-- ================== GESTION COLORIS ================== -->
-    <div class="card card-navy color-palette-box">
+    <div class="card card-danger color-palette-box">
         <!-- Titre carte -->
 
         <div class="card-header">
@@ -250,7 +250,7 @@
                     </div>
 
                     <div class="col-xs-12 col-sm-2 mb-2 d-flex justify-content-center align-items-end">
-                        <button name="addColoris" value="<?= $articleInfo['id'] ?>" class="btn bg-lime w-100" type="submit"><i class="fas fa-plus"></i></button> </button>
+                        <button name="addColoris" value="<?= $articleInfo['id'] ?>" class="btn btn-success w-100" type="submit"><i class="fas fa-plus"></i></button> </button>
                     </div>
                 </div>
             </form>
@@ -312,7 +312,7 @@
     <!-- Fin carte -->
 
     <!-- ================== GESTION PHOTO ================== -->
-    <div class="card card-lightblue color-palette-box">
+    <div class="card card-danger color-palette-box">
         <!-- Titre carte -->
 
         <div class="card-header">
@@ -343,7 +343,7 @@
 
                 <div class="d-flex flex-row-reverse justify-content-between align-items-center d-flex mt-3">
                     <div class="d-flex flex-column mx-3 justify-content-between">
-                        <button name="addImage" value="<?= $articleInfo['id'] ?>" class="btn bg-lime" type="submit"><i class="fas fa-plus"></i> &nbsp; Ajouter</button>
+                        <button name="addImage" value="<?= $articleInfo['id'] ?>" class="btn btn-success" type="submit"><i class="fas fa-plus"></i> &nbsp; Ajouter</button>
                     </div>
                 </div>
             </form>

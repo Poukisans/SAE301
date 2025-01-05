@@ -113,7 +113,7 @@
     <aside class="main-sidebar sidebar-dark-primary">
       <!-- Brand Logo -->
       <a href="./" class="brand-link">
-        <img src="dist/img/logo_mezzanotte34_mini.svg" alt="e-Birbone Logo" class="brand-image">
+        <img src="dist/img/logo_mini.svg" alt="e-Birbone Logo" class="brand-image">
         <span class="brand-text font-weight-light">e-Birbone</span>
       </a>
 
@@ -151,6 +151,30 @@
               <a href="./commandes" class="nav-link <?= $currentContent == "commande" ? "active" : "" ?>">
                 <i class="fas fa-truck-loading nav-icon"></i>
                 <p>Commandes</p>
+              </a>
+            </li>
+
+            <!-- general -->
+            <li class="nav-item">
+              <a href="./general" class="nav-link <?= $currentContent == "general" ? "active" : "" ?>">
+                <i class="fas fa-cog nav-icon"></i>
+                <p>Général</p>
+              </a>
+            </li>
+
+            <!-- sections -->
+            <li class="nav-item">
+              <a href="./sections" class="nav-link <?= $currentContent == "section" ? "active" : "" ?>">
+                <i class="fas fa-window-maximize nav-icon"></i>
+                <p>Sections</p>
+              </a>
+            </li>
+
+            <!-- Réseaux sociaux -->
+            <li class="nav-item">
+              <a href="./reseaux" class="nav-link <?= $currentContent == "reseaux" ? "active" : "" ?>">
+                <i class="fas fa-hashtag nav-icon"></i>
+                <p>Réseaux sociaux</p>
               </a>
             </li>
 
