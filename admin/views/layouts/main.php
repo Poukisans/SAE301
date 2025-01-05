@@ -24,6 +24,8 @@
   <!-- summernote -->
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
 
+  <!-- DataTable -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap4.min.css">
 
 </head>
 
@@ -147,15 +149,15 @@
             </li>
 
             <!-- commande -->
-            <li class="nav-item">
+            <li class="nav-item pb-3">
               <a href="./commandes" class="nav-link <?= $currentContent == "commande" ? "active" : "" ?>">
                 <i class="fas fa-truck-loading nav-icon"></i>
-                <p>Commandes</p>
+                <p class=" ">Commandes &nbsp;<span class="badge badge-warning p-2"><?= count($layoutContent['commandLeft']) >= 1 ? count($layoutContent['commandLeft']) : "" ?></span></p>
               </a>
             </li>
 
             <!-- general -->
-            <li class="nav-item">
+            <li class="nav-item border-top border-dark pt-3">
               <a href="./general" class="nav-link <?= $currentContent == "general" ? "active" : "" ?>">
                 <i class="fas fa-cog nav-icon"></i>
                 <p>Général</p>
@@ -207,6 +209,9 @@
   <script src="plugins/summernote/summernote-bs4.min.js"></script>
   <!-- AdminLTE App -->
   <script src="dist/js/adminlte.js"></script>
+  <!-- DataTables JS -->
+  <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap4.min.js"></script>
 
   <!-- Show file name for Inputs Files -->
   <script>
@@ -218,6 +223,7 @@
       });
     });
   </script>
+
 
   <!-- Auto-hide alerts -->
   <script>
