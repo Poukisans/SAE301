@@ -173,13 +173,13 @@ sup {
 }
 
 a {
-    color: #273fff;
+    color: #e63325;
     text-decoration: none;
     background-color: transparent;
 }
 
 a:hover {
-    color: #5863bf;
+    color: #ae251b;
     text-decoration: underline;
     text-underline-offset: 5px;
 }
