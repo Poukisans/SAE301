@@ -7,7 +7,7 @@
 
         <!-- Fin carte -->
 
-        <div class="accordion">
+        <div class="accordion my-3">
             <!-- Début Collapse -->
             <div class="card card-secondary text-secondary color-palette-box">
                 <!-- Head Collapse-->

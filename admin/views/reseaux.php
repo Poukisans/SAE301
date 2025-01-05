@@ -1,7 +1,7 @@
 <div class="container-fluid">
 
     <!-- ================== MODIF TECHNICIENS ================== -->
-    <div class="card card-secondary color-palette-box">
+    <div class="card card-secondary color-palette-box mt-3">
         <!-- Titre carte -->
 
         <div class="card-header">
