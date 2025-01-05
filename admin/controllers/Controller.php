@@ -1,17 +1,18 @@
 <?php
 class Controller
 {
-    private $contactModel;
+    private $commandModel;
     private $layoutContent;
 
     protected function __construct()
     {
         // Récupérer les sections
-
+        $this->commandModel = new CommandeModel();
+        $commandLeft = $this->commandModel->getLeft();
 
         // Construire le tableau layoutContent
         $this->layoutContent = array(
-            '' => 0
+            'commandLeft' => $commandLeft
         );
     }
 
