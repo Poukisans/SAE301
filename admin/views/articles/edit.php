@@ -99,6 +99,7 @@
                             <div class="d-flex flex-column justify-content-end mx-3 mb-2 flex-fill">
                                 <label for="nom">Nom de l'article</label>
                                 <input name="nom" value="<?= $articleInfo['nom'] ?>" required class="form-control" type="text">
+                                <p class="font-weight-light font-italic mx-2 my-1">Le nom de l'article doit être unique</p>
                             </div>
 
                             <!-- Tarif -->
