@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <!-- ================== MODIFICATIONS ================== -->
-    <div class="card card-secondary color-palette-box">
+    <div class="card card-secondary color-palette-box mt-3">
         <!-- Titre carte -->
 
         <div class="card-header">
@@ -14,83 +14,168 @@
         <!-- Contenu carte -->
         <div class="card-body d-flex flex-column justify-content-between">
             <!-- Informations  -->
-            <form action="articles/<?= $articleInfo['lien'] ?>" enctype="multipart/form-data" method="post">
-                <div class="row w-100">
-                    <div class="col-xs-12 col-sm-12 col-md-4 d-flex flex-column justify-content-center">
-                        <div class="w-100 h-auto d-flex justify-content-center align-items-center" style="aspect-ratio: 1/1;">
-                            <?php
-                            if (!empty($articleInfo['miniature'])) {
-                            ?>
-                                <img src="<?= BASE_URL ?><?= $articleInfo['miniature'] ?>" class="w-100 h-auto">
-                            <?php
-                            } else {
-                            ?>
-                                <p>Aucune miniature</p>
-                            <?php
-                            }
-                            ?>
+            <div class="row w-100">
+                <div class="col-xs-12 col-sm-12 col-md-7 d-flex flex-column justify-content-center  p-3">
+                    <h4 class="mb-3">Informations client</h4>
+                    <div class="bg-light h-100 d-flex flex-column justify-content-center p-4">
+                        <div class="d-flex">
+                            <p class="m-0"><b><?= $commandeInfo['prenom'] ?></b></p>
+                            &nbsp;
+                            <p class="m-0"><b><?= $commandeInfo['nom'] ?></b></p>
                         </div>
 
-                        <div>
-                            <!-- Maj Miniature  -->
-                            <div class="d-flex flex-row-reverse justify-content-between align-items-center d-flex my-3">
-                                <div class="d-flex flex-column justify-content-end flex-fill">
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input name="miniature" value="<?= $articleInfo['miniature'] ?>" type="hidden">
-                                            <input name="miniature" type="file" class="custom-file-input" id="formFile" accept="image/*">
-                                            <label class="custom-file-label" for="formFile" data-browse="Parcourir">
-                                                <i class="fas fa-upload"></i> Choisir une miniature...
-                                            </label>
-                                        </div>
+                        <div class="d-flex flex-column">
+                            <p class="m-0"><?= $commandeInfo['adresse'] ?></p>
+                            <p class="m-0"><?= isset($commandeInfo['complement_adresse']) ? $commandeInfo['complement_adresse'] : "" ?></p>
+                        </div>
+
+                        <div class="d-flex">
+                            <p class="m-0"><?= $commandeInfo['code_postal'] ?>,</p>
+                            &nbsp;
+                            <p class="m-0"><?= $commandeInfo['region'] ?>,</p>
+                            &nbsp;
+                            <p class="m-0"><?= $commandeInfo['pays'] ?></p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-5 d-flex flex-column flex-fill">
+                    <h4 class="mb-3">Statut commande</h4>
+                    <?php
+                    if ($commandeInfo['statut'] == 3) {
+                    ?>
+                        <div class="d-flex flex-column">
+                            <button disabled name="statut" value="0" type="submit" class='btn btn-outline-secondary my-2'>Non traitée</button>
+                            <button disabled name="statut" value="1" type="submit" class='btn btn-outline-secondary my-2'>Préparée</button>
+                            <button disabled name="statut" value="2" type="submit" class='btn btn-outline-secondary my-2'>Expédiée</button>
+                        </div>
+                    <?php
+                    } else {
+                    ?>
+                        <form action="" method="post" class="d-flex flex-column">
+                            <input type="hidden" name="id" value="<?= $commandeInfo['id'] ?>">
+                            <button name="statut" value="0" type="submit" class='btn <?= $commandeInfo['statut'] == 0 ? 'btn-danger' : 'btn-outline-danger my-2' ?> my-2'>Non traitée</button>
+                            <button name="statut" value="1" type="submit" class='btn <?= $commandeInfo['statut'] == 1 ? 'btn-warning' : 'btn-outline-warning my-2' ?> my-2'>Préparée</button>
+                            <button name="statut" value="2" type="submit" class='btn <?= $commandeInfo['statut'] == 2 ? 'btn-success' : 'btn-outline-success my-2' ?> my-2'>Expédiée</button>
+                        </form>
+
+                    <?php
+
+                    }
+                    ?>
+                </div>
+            </div>
+
+            <div class="row w-100">
+                <?php
+                if ($commandeInfo['statut'] == 3) {
+                ?>
+                    <button disabled class="btn btn-danger my-2 w-100">
+                        Commande annulée
+                    </button>
+                <?php
+                } else {
+                ?>
+                    <button type="button" class="btn <?= $commandeInfo['statut'] == 3 ? 'btn-danger' : 'btn-outline-danger' ?> my-2 w-100" data-toggle="modal" data-target="#cancel">Annuler la commande</button>
+                <?php
+                }
+                ?>
+
+                <!-- Modal suppression -->
+                <form action="" method="POST" class="align-items-center justify-content-center d-flex">
+                    <div id="cancel" class="modal fade" tabindex="-1" aria-labelledby="cancel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    Êtes-vous sûr de vouloir annuler cette commande ? <br> <br>
+                                    <b>Cette action est irréversible. Les articles seront remis en stock.</b>
+                                </div>
+                                <div class="modal-footer d-flex justify-content-end">
+                                    <div>
+                                        <input type="hidden" name="id" value="<?= $commandeInfo['id'] ?>">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                        <button name="statut" value="<?= $articleInfo['id'] ?>" type="submit" class="btn btn-danger">Annuler commande</button>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
+                </form>
 
-                    <div class="col-xs-12 col-sm-12 col-md-8 d-flex flex-column flex-fill">
-                        <div class="d-flex flex-column">
-                            <!-- Nom -->
-                            <div class="d-flex flex-column justify-content-end mx-3 mb-2 flex-fill">
-                                <label for="nom">Nom de l'article</label>
-                                <input name="nom" value="<?= $articleInfo['nom'] ?>" required class="form-control" type="text">
-                                <p class="font-weight-light font-italic mx-2 my-1">Le nom de l'article doit être unique</p>
-                            </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fin carte -->
 
-                            <!-- Tarif -->
-                            <div class="d-flex flex-column justify-content-end mx-3 mb-2 flex-fill">
-                                <label for="prix">Prix</label>
-                                <input name="prix" value="<?= $articleInfo['prix'] ?>" required class="form-control" type="number">
-                            </div>
+    <!-- ================== MODIFICATIONS ================== -->
+    <div class="card card-secondary color-palette-box mt-3">
+        <!-- Titre carte -->
 
-                            <!-- Categorie -->
-                            <div class="d-flex flex-column justify-content-end mx-3 mb-2 flex-fill">
-                                <label for="categorie">Catégorie</label>
-                                <select name="categorie" class="form-control" required>
-                                    <option value="homme" <?= $articleInfo['categorie'] == "homme" ? "selected" : "" ?>>Homme</option>
-                                    <option value="femme" <?= $articleInfo['categorie'] == "femme" ? "selected" : "" ?>>Femme</option>
-                                    <option value="enfant" <?= $articleInfo['categorie'] == "enfant" ? "selected" : "" ?>>Enfant</option>
-                                </select>
-                            </div>
+        <div class="card-header">
+            <h3 class="card-title">
+                <i class="fas fa-pencil-alt"></i>
+                &nbsp;
+                Informations <?= $currentContent ?>
+            </h3>
+        </div>
 
-                            <!-- Description -->
-                            <div class="d-flex flex-column justify-content-end mx-3 my-4 flex-fill">
-                                <label for="description">Description</label>
-                                <textarea name="description" required class="form-control" maxlength="300" style="height: 200px;"><?= $articleInfo['description'] ?></textarea>
-                                <p class="font-weight-light font-italic mx-2 my-1">Max 300 caractères</p>
-                            </div>
-                        </div>
+        <!-- Contenu carte -->
+        <div class="card-body d-flex flex-column justify-content-between">
+            <!-- Informations  -->
 
-                        <div class="d-flex flex-row-reverse justify-content-between align-items-center d-flex mt-3">
-                            <div class="d-flex flex-column mx-3 justify-content-center">
-                                <button name="update" value="<?= $articleInfo['id'] ?>" class="btn btn-success" type="submit"><i class="fas fa-sync-alt"></i></i> &nbsp; Mettre à jour</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
+            <table id="table" class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Article</th>
+                        <th>Coloris</th>
+                        <th>Quantite</th>
+                        <th>Taille</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach ($commandeArticleInfo as $content) {
+                    ?>
+
+                        <tr>
+                            <td><?= $content['nom_article'] ?></td>
+                            <td><?= $content['nom_coloris'] ?></td>
+                            <td><b><?= $content['quantite'] ?></b></td>
+                            <td>
+                                <?php
+                                switch ($content['id_taille']) {
+                                    case 1:
+                                        echo "XXS";
+                                        break;
+                                    case 2:
+                                        echo "XS";
+                                        break;
+                                    case 3:
+                                        echo "S";
+                                        break;
+                                    case 4:
+                                        echo "M";
+                                        break;
+                                    case 5:
+                                        echo "L";
+                                        break;
+                                    case 6:
+                                        echo "XL";
+                                        break;
+                                    case 7:
+                                        echo "XXL";
+                                        break;
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+                </tbody>
+            </table>
+
         </div>
     </div>
     <!-- Fin carte -->
