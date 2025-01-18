@@ -118,10 +118,10 @@
                                         <?php
                                         switch ($articleInfo['type']) {
                                             case 0:
-                                                echo "Promotion en cours : " . number_format($articleInfo['promotion'], 2, ',', ' ') . " €";
+                                                echo "Promotion en cours : " . number_format($articleInfo['promotion'], 2, '.', '') . " €";
                                                 break;
                                             case 1:
-                                                echo "Promotion en cours: " . number_format($articleInfo['promotion'], 2, ',', ' ') . " €";
+                                                echo "Promotion en cours: " . number_format($articleInfo['promotion'], 2, '.', '') . " €";
                                                 break;
                                             case 2:
                                                 echo "Promotion par lot en cours";

@@ -19,7 +19,7 @@ class ArticleModel extends Model
                 p.type,
                 p.id AS id_promotion,
                 CASE 
-                    WHEN p.id IS NOT NULL AND NOW() BETWEEN p.date_debut AND p.date_fin THEN 
+                    WHEN p.id IS NOT NULL AND CURDATE() BETWEEN p.date_debut AND p.date_fin THEN 
                         CASE 
                             WHEN p.type = 0 THEN a.prix - (a.prix * p.promotion / 100)
                             WHEN p.type = 1 THEN p.promotion
