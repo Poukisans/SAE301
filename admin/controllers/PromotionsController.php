@@ -7,6 +7,7 @@ class PromotionsController extends Controller
     private $_view;
     private $layoutContent;
     private $promotionModel;
+    private $promotionArticleModel;
 
 
     public function __construct($url)
@@ -20,6 +21,7 @@ class PromotionsController extends Controller
             }
 
             $this->promotionModel = new PromotionModel;
+            $this->promotionArticleModel = new PromotionArticleModel;
 
             // Vérification si des données POST sont présentes
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -52,13 +54,16 @@ class PromotionsController extends Controller
 
     private function pageAction($url, $content)
     {
-        $promotionInfo = $this->promotionModel->getInfo($content); // Récupérer les informations 
+        $promotionInfo = $this->promotionModel->getInfo($content); // Récupérer les informations
+        $id_promo = $promotionInfo['id'];
+        $promotionArticleInfo = $this->promotionArticleModel->getInfo($content); // Récupérer les informations
 
         $this->_view = new View("views/" . $url . "/edit.php", [
             'layoutContent' => $this->layoutContent,
             'currentPage' => '<a href="./' . $url . '">' . ucwords($url) . '</a> - ' . $promotionInfo['nom'],
             'currentContent' => ("promotion"),
             'promotionInfo' => $promotionInfo,
+            'promotionArticleInfo' => $promotionArticleInfo,
         ]);
     }
 

@@ -12,11 +12,39 @@ class PromotionModel extends Model
     }
 
     // ==================================== LISTE ====================================
-    public function getInfo()
+    public function getInfo($id)
     {
-        $sql = "SELECT * FROM `b_promotions`";
-        $statment = $this->executerRequete($sql);
-        return $statment->fetch(PDO::FETCH_ASSOC);
+        $sql = "SELECT 
+                p.*,
+                CASE 
+                    WHEN p.id IS NOT NULL AND NOW() BETWEEN p.date_debut AND p.date_fin THEN 
+                        CASE 
+                            WHEN p.type = 0 THEN a.prix - (a.prix * p.promotion / 100)
+                            WHEN p.type = 1 THEN p.promotion
+                            WHEN p.type = 2 THEN 'lot'
+                            ELSE a.prix
+                        END
+                    ELSE null
+                END AS 'promotion'
+            FROM 
+                b_promotions p
+            LEFT JOIN 
+                b_promotion_articles pa ON p.id = pa.id_promotion
+            LEFT JOIN 
+                b_articles a ON pa.id_article = a.id
+            WHERE
+                p.id = 1
+            ORDER BY 
+                a.nom;";
+        $statment = $this->executerRequete($sql, [':id' => $id]);
+
+        $content = $statment->fetch(PDO::FETCH_ASSOC);
+
+        if (!$content) {
+            throw new Exception("404 Not Found : Promotion inconnue.");
+        }
+
+        return $content;
     }
 
     // ==================================== AJOUT ====================================
