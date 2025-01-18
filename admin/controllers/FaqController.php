@@ -41,7 +41,7 @@ class FaqController extends Controller
 
     private function handlePostRequest()
     {
-        //Ajout reseau
+        //Ajout
         if (isset($_POST['add'], $_POST['question'], $_POST['reponse'])) {
             $data = [
                 'question' => $_POST['question'],
@@ -55,7 +55,7 @@ class FaqController extends Controller
             }
         }
 
-        //Maj reseau
+        //Maj
         if (isset($_POST['update'], $_POST['question'], $_POST['reponse'])) {
             $data = [
                 'id' => $_POST['update'],
@@ -70,7 +70,7 @@ class FaqController extends Controller
             }
         }
 
-        //Delete reseau
+        //Delete
         if (isset($_POST['delete'])) {
             $id = $_POST['delete'];
 

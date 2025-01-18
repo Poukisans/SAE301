@@ -41,7 +41,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- Qiuestion -->
+                                    <!-- Question -->
                                     <div class="d-flex flex-row flex-fill">
                                         <div class="d-flex flex-column justify-content-end mx-3 mb-2 flex-fill">
                                             <label for="meta_desc">Réponse</label>
