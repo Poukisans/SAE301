@@ -180,6 +180,30 @@
               </a>
             </li>
 
+            <!-- FAQ -->
+            <li class="nav-item">
+              <a href="./faq" class="nav-link <?= $currentContent == "faq" ? "active" : "" ?>">
+                <i class="fas fa-question nav-icon"></i>
+                <p>F.A.Q</p>
+              </a>
+            </li>
+
+            <!-- Contact -->
+            <li class="nav-item">
+              <a href="./contact" class="nav-link <?= $currentContent == "contact" ? "active" : "" ?>">
+                <i class="fas fa-phone-alt nav-icon"></i>
+                <p>Contact</p>
+              </a>
+            </li>
+
+            <!-- Mentions legales -->
+            <li class="nav-item">
+              <a href="./mentions-legales" class="nav-link <?= $currentContent == "mentions-legales" ? "active" : "" ?>">
+                <i class="fas fa-balance-scale nav-icon"></i>
+                <p>Mentions Legales</p>
+              </a>
+            </li>
+
           </ul>
         </nav>
       </div>
@@ -285,13 +309,18 @@
           ['misc', ['codeview', 'fullscreen']]
         ]
       });
-
-      // CodeMirror
-      CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
-        mode: "htmlmixed",
-        theme: "monokai"
-      });
     })
+  </script>
+
+  <script>
+    $(function() {
+      $("#table").DataTable({
+        "responsive": true,
+        "lengthChange": true,
+        "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      }).buttons().container().appendTo('#commande_wrapper .col-md-6:eq(0)');
+    });
   </script>
 
 </html>
