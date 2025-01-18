@@ -16,9 +16,7 @@
     <script src="assets/js/main.js"></script>
 
     <!-- Inter Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/lyz7vnt.css">
 </head>
 
 <body class="inter_text">
@@ -81,7 +79,7 @@
         <div class="row footer">
             <div class="row footer_links">
                 <div class="container plan_site">
-                    <h2 class="dogma_other uppercase">
+                    <h2 class="inter_title uppercase">
                         Plan du site
                     </h2>
 
