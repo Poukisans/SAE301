@@ -108,6 +108,33 @@
                                 <input name="prix" value="<?= $articleInfo['prix'] ?>" required class="form-control" type="number">
                             </div>
 
+                            <!-- Promotion -->
+                            <?php
+                            if (!empty($articleInfo['promotion'])) {
+                            ?>
+                                <a href="promotions/<?=$articleInfo['id_promotion']?>" class="d-flex flex-column justify-content-end mx-3 mb-3 flex-fill text-danger">
+                                    <b>
+                                        <i class="fas fa-tags"></i>
+                                        <?php
+                                        switch ($articleInfo['type']) {
+                                            case 0:
+                                                echo "Promotion en cours : " . number_format($articleInfo['promotion'], 2, ',', ' ') . " €";
+                                                break;
+                                            case 1:
+                                                echo "Promotion en cours: " . number_format($articleInfo['promotion'], 2, ',', ' ') . " €";
+                                                break;
+                                            case 2:
+                                                echo "Promotion par lot en cours";
+                                                break;
+                                        }
+                                        ?>
+                                    </b>
+                                </a>
+                            <?php
+                            }
+
+                            ?>
+
                             <!-- Categorie -->
                             <div class="d-flex flex-column justify-content-end mx-3 mb-2 flex-fill">
                                 <label for="categorie">Catégorie</label>

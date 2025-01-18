@@ -7,31 +7,23 @@ class ArticleModel extends Model
   public function getList()
   {
 
-    $condition = NULL;
-
     $sql = "SELECT 
     a.id,
     a.nom,
     a.lien,
     a.miniature,
     a.categorie,
-    CASE 
-        WHEN p.id IS NOT NULL AND NOW() BETWEEN p.date_debut AND p.date_fin THEN p.rabais
-        ELSE NULL
-    END AS rabais,
-    CASE 
-        WHEN p.id IS NOT NULL AND NOW() BETWEEN p.date_debut AND p.date_fin THEN p.prix_force
-        ELSE NULL
-    END AS prix_force,
+    a.prix,
     CASE 
         WHEN p.id IS NOT NULL AND NOW() BETWEEN p.date_debut AND p.date_fin THEN 
             CASE 
-                WHEN p.prix_force IS NOT NULL THEN p.prix_force
-                WHEN p.rabais IS NOT NULL THEN a.prix - (a.prix * p.rabais / 100)
+                WHEN p.type = 0 THEN a.prix - (a.prix * p.promotion / 100)
+                WHEN p.type = 1 THEN p.promotion
+                WHEN p.type = 2 THEN 'lot'
                 ELSE a.prix
             END
-        ELSE a.prix
-    END AS prix
+        ELSE null
+    END AS 'promotion'
 FROM 
     b_articles a
 LEFT JOIN 
@@ -39,8 +31,7 @@ LEFT JOIN
 LEFT JOIN 
     b_promotions p ON pa.id_promotion = p.id
 ORDER BY 
-    a.nom;
-   ";
+    a.nom;";
 
     $statment = $this->executerRequete($sql);
     return $statment->fetchAll(PDO::FETCH_ASSOC);
@@ -48,8 +39,6 @@ ORDER BY
 
   public function getListCategory($categorie)
   {
-
-    $condition = NULL;
 
     $sql = "SELECT 
     a.id,
