@@ -14,7 +14,30 @@ class ArticleModel extends Model
     // ==================================== INFO ====================================
     public function getInfo($content)
     {
-        $sql = "SELECT * FROM b_articles WHERE lien = :lien";
+        $sql = "SELECT 
+                a.*,
+                p.type,
+                p.id AS id_promotion,
+                CASE 
+                    WHEN p.id IS NOT NULL AND NOW() BETWEEN p.date_debut AND p.date_fin THEN 
+                        CASE 
+                            WHEN p.type = 0 THEN a.prix - (a.prix * p.promotion / 100)
+                            WHEN p.type = 1 THEN p.promotion
+                            WHEN p.type = 2 THEN 'lot'
+                            ELSE a.prix
+                        END
+                    ELSE null
+                END AS 'promotion'
+            FROM 
+                b_articles a
+            LEFT JOIN 
+                b_promotion_articles pa ON a.id = pa.id_article
+            LEFT JOIN 
+                b_promotions p ON pa.id_promotion = p.id
+            WHERE
+                a.lien = :lien
+            ORDER BY 
+                a.nom;";
         $statment = $this->executerRequete($sql, [':lien' => $content]);
 
         $content = $statment->fetch(PDO::FETCH_ASSOC);
