@@ -125,6 +125,25 @@ class ArticleModel extends Model
         }
     }
 
+    // ==================================== UPDATE INFO COMPOSITION ====================================
+    public function updateInfo($data)
+    {
+        extract($data);
+
+        try {
+            $sql = "UPDATE b_articles SET composition = :composition, taille = :taille, entretien = :entretien, fabrication = :fabrication WHERE id = :id";
+            $this->executerRequete($sql, [
+                ':id' => $id,
+                ':composition' => $composition,
+                ':taille' => $taille,
+                ':entretien' => $entretien,
+                ':fabrication' => $fabrication,
+            ]);
+        } catch (PDOException $e) {
+            throw new Exception("Erreur lors de la mise à jour en BDD: " . $e->getMessage());
+        }
+    }
+
     // ==================================== AFFICHER/MASQUER ====================================
     public function setDisplay($data)
     {

@@ -112,7 +112,7 @@
                             <?php
                             if (!empty($articleInfo['promotion'])) {
                             ?>
-                                <a href="promotions/<?=$articleInfo['id_promotion']?>" class="d-flex flex-column justify-content-end mx-3 mb-3 flex-fill text-danger">
+                                <a href="promotions/<?= $articleInfo['id_promotion'] ?>" class="d-flex flex-column justify-content-end mx-3 mb-3 flex-fill text-danger">
                                     <b>
                                         <i class="fas fa-tags"></i>
                                         <?php
@@ -334,6 +334,58 @@
             <?php
             }
             ?>
+
+        </div>
+    </div>
+    <!-- Fin carte -->
+
+    <!-- ================== GESTION INFO COMPOSITION ================== -->
+    <div class="card card-danger color-palette-box">
+        <!-- Titre carte -->
+
+        <div class="card-header">
+            <h3 class="card-title">
+                <i class="fas fa-palette"></i>
+                &nbsp;
+                Modifier informations
+            </h3>
+        </div>
+
+        <!-- Contenu carte -->
+        <div class="card-body d-flex flex-column justify-content-between">
+            <!-- Informations  -->
+            <form action="" enctype="multipart/form-data" method="post">
+                <div class="row">
+                    <div class="col-12 col-sm-6 mb-2">
+                        <label for="composition">Composition</label>
+                        <textarea name="composition" required class="form-control" maxlength="254" style="height: 100px;"><?= $articleInfo['composition'] ?></textarea>
+                    </div>
+
+                    <div class="col-12 col-sm-6 mb-2">
+                        <label for="taille">Infos Taille</label>
+                        <textarea name="taille" required class="form-control" maxlength="254" style="height: 100px;"><?= $articleInfo['taille'] ?></textarea>
+                    </div>
+
+                    <div class="col-12 col-sm-6 mb-2">
+                        <label for="entretien">Entretien</label>
+                        <textarea name="entretien" required class="form-control" maxlength="254" style="height: 100px;"><?= $articleInfo['entretien'] ?></textarea>
+                    </div>
+
+                    <div class="col-12 col-sm-6 mb-2">
+                        <label for="fabrication">Fabrication</label>
+                        <textarea name="fabrication" required class="form-control" maxlength="254" style="height: 100px;"><?= $articleInfo['fabrication'] ?></textarea>
+                    </div>
+
+                </div>
+
+                <div class="row mt-2">
+                    <div class="d-flex justify-content-end align-items-end w-100">
+                        <button type="submit" name="updateInfo" value="<?=$articleInfo['id']?>" class="btn btn-success">
+                            <i class="fas fa-sync-alt"></i> &nbsp;Mettre à jour
+                        </button>
+                    </div>
+                </div>
+            </form>
 
         </div>
     </div>

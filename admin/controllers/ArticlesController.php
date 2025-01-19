@@ -85,7 +85,7 @@ class ArticlesController extends Controller
 
     private function handlePostRequest()
     {
-        //Ajout film
+        //Ajout article
         if (isset($_POST['add'], $_POST['nom'], $_POST['categorie'])) {
             $data = [
                 'nom' => $_POST['nom'],
@@ -139,7 +139,6 @@ class ArticlesController extends Controller
                 'prix' => $_POST['prix'],
                 'categorie' => $_POST['categorie'],
                 'description' => $_POST['description'],
-                //Formatage nom article pour maj lien
                 //'lien' => preg_replace('/[^a-z0-9-]/', '', str_replace([' ', '/'], '-', strtolower(transliterator_transliterate('Any-Latin; Latin-ASCII', $_POST['nom'])))),
                 'lien' => preg_replace('/[^a-z0-9-]/', '', str_replace([' ', '/'], '-', strtolower(iconv('UTF-8', 'ASCII//TRANSLIT', $_POST['nom']))))
 
@@ -257,6 +256,23 @@ class ArticlesController extends Controller
                 $_SESSION['warnMsg'] = "Le coloris a bien été supprimé"; //Output
             } catch (Exception $e) {
                 $_SESSION['errorMsg'] = "Erreur : " . $e->getMessage();
+            }
+        }
+
+        //Mise a jour infos
+        if (isset($_POST['updateInfo'], $_POST['composition'], $_POST['taille'], $_POST['entretien'], $_POST['fabrication'])) {
+            $data = [
+                'id' => $_POST['updateInfo'],
+                'composition' => $_POST['composition'],
+                'taille' => $_POST['taille'],
+                'entretien' => $_POST['entretien'],
+                'fabrication' => $_POST['fabrication'],
+            ];
+            try {
+                $this->articleModel->updateInfo($data);
+                $_SESSION['successMsg'] = "L'article a bien été mis à jour"; //Output
+            } catch (Exception $e) {
+                $_SESSION['errorMsg'] = "Erreur : " . $e->getMessage(); //Output
             }
         }
 
