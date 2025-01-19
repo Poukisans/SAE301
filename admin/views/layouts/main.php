@@ -314,11 +314,60 @@
 
   <script>
     $(function() {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+  </script>
+
+  <script>
+    $(function() {
       $("#table").DataTable({
         "responsive": true,
         "lengthChange": true,
         "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        "language": {
+          "emptyTable": "Aucun élément",
+          "info": "<b>_END_</b> éléments sur <b>_TOTAL_</b> affichés",
+          "infoEmpty": "<b>0</b> éléments affichés",
+          "infoFiltered": "(sur <b>_MAX_</b> éléments au total)",
+          "lengthMenu": "Afficher _MENU_éléments",
+          "loadingRecords": "Chargement...",
+          "processing": "Traitement...",
+          "search": "Rechercher:",
+          "zeroRecords": "Aucun résultat trouvé",
+          "paginate": {
+            "first": "Début",
+            "last": "Fin",
+            "next": "<i class='m-0 pb-1 fas fa-arrow-right'></i>",
+            "previous": "<i class='m-0 pb-1 fas fa-arrow-left'></i>"
+          },
+        }
+      }).buttons().container().appendTo('#commande_wrapper .col-md-6:eq(0)');
+    });
+  </script>
+
+  <script>
+    $(function() {
+      $("#table2").DataTable({
+        "responsive": true,
+        "lengthChange": true,
+        "autoWidth": false,
+        "language": {
+          "emptyTable": "Aucun élément",
+          "info": "<b>_END_</b> éléments sur <b>_TOTAL_</b> affichés",
+          "infoEmpty": "<b>0</b> éléments affichés",
+          "infoFiltered": "(sur <b>_MAX_</b> éléments au total)",
+          "lengthMenu": "Afficher _MENU_éléments",
+          "loadingRecords": "Chargement...",
+          "processing": "Traitement...",
+          "search": "Rechercher:",
+          "zeroRecords": "Aucun résultat trouvé",
+          "paginate": {
+            "first": "Début",
+            "last": "Fin",
+            "next": "<i class='m-0 pb-1 fas fa-arrow-right'></i>",
+            "previous": "<i class='m-0 pb-1 fas fa-arrow-left'></i>"
+          },
+        }
       }).buttons().container().appendTo('#commande_wrapper .col-md-6:eq(0)');
     });
   </script>
