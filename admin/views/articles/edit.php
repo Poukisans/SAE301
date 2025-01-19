@@ -8,7 +8,7 @@
         <!-- Show/hide -->
         <form action="articles/<?= $articleInfo['lien'] ?>" method="POST" class="align-items-center justify-content-center d-flex mx-1">
             <label class="btn btn-success mx-1 font-weight-normal" for="<?= $articleInfo['id'] ?>" style="margin-bottom:0px;">
-                <?= $articleInfo['affichage'] == 1 ? "<i class='fas fa-eye'></i> &nbsp; Masquer" : "<i class='far fa-eye-slash'></i> &nbsp; Afficher" ?>
+                <?= $articleInfo['affichage'] == 1 ? "<i class='fas fa-eye'></i> &nbsp; Retirer de la vente" : "<i class='far fa-eye-slash'></i> &nbsp; Mettre en vente" ?>
             </label>
 
             <input value="<?= $articleInfo['id'] ?>" type="hidden" name="setDisplay">
