@@ -149,4 +149,3 @@ class CommandesController extends Controller
         }
     }
 }
-var_dump($_POST);
