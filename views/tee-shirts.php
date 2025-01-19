@@ -12,7 +12,7 @@
 </div>
 
 <div class="mini_bar">
-    <p class="nombre_article_list"><?=count($articleList)?> articles</p>
+    <p class="nombre_article_list"><?= count($articleList) ?> articles</p>
     <div class="custom_filtre">
         <select name="filtres" id="filtres">
             <option value="prix_croissant">Prix croissant </option>
@@ -44,14 +44,18 @@
                             <?php
                             } elseif ($content['type_promotion'] == 1) {
                             ?>
-                                <p class="prix_prom"><?= $content['promotion'] ?></p>
-                                <p class="prix_barre"><?= $content['prix'] ?></p>
+                                <p class="prix_prom"><?= $content['promotion'] ?>€</p>
+                                <p class="prix_barre"><?= $content['prix'] ?>€</p>
 
+                            <?php
+                            } elseif ($content['type_promotion'] == 2) {
+                            ?>
+                                <p class="prix"><?= $content['prix'] ?>€</p>
                             <?php
                             }
                         } else {
                             ?>
-                            <p class="prix"><?= $content['prix'] ?></p>
+                            <p class="prix"><?= $content['prix'] ?>€</p>
                         <?php
                         }
                         ?>

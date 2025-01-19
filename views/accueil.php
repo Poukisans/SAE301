@@ -23,7 +23,7 @@
     <div class="article_list">
         <?php
         foreach ($articleList as $content) {
-            if (!empty($content['promotion'])) {
+            if (!empty($content['promotion'] && $content['type_promotion'] != 2)) {
         ?>
                 <div class="article">
                     <a class="nom_article" href="tee-shirts/<?= $content['categorie'] ?>/<?= $content['lien'] ?>">
@@ -42,8 +42,8 @@
                                 <?php
                                 } elseif ($content['type_promotion'] == 1) {
                                 ?>
-                                    <p class="prix_prom"><?= $content['promotion'] ?></p>
-                                    <p class="prix_barre"><?= $content['prix'] ?></p>
+                                    <p class="prix_prom"><?= $content['promotion'] ?>€</p>
+                                    <p class="prix_barre"><?= $content['prix'] ?>€</p>
 
                                 <?php
                                 }
@@ -105,14 +105,18 @@
                                 <?php
                                 } elseif ($content['type_promotion'] == 1) {
                                 ?>
-                                    <p class="prix_prom"><?= $content['promotion'] ?></p>
-                                    <p class="prix_barre"><?= $content['prix'] ?></p>
+                                    <p class="prix_prom"><?= $content['promotion'] ?>€</p>
+                                    <p class="prix_barre"><?= $content['prix'] ?>€</p>
 
+                                <?php
+                                } elseif ($content['type_promotion'] == 2) {
+                                ?>
+                                    <p class="prix"><?= $content['prix'] ?>€</p>
                                 <?php
                                 }
                             } else {
                                 ?>
-                                <p class="prix"><?= $content['prix'] ?></p>
+                                <p class="prix"><?= $content['prix'] ?>€</p>
                             <?php
                             }
                             ?>
