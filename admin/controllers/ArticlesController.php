@@ -20,6 +20,10 @@ class ArticlesController extends Controller
 
         $this->FilePath = "public/articles/";
 
+        if (empty($_SESSION['vue_article'])) {
+            $_SESSION['vue_article'] = 0;
+        }
+
         if ($url[0] === "articles") {
             if (count($url) > 2) {
                 throw new Exception('Page not found');
@@ -85,6 +89,15 @@ class ArticlesController extends Controller
 
     private function handlePostRequest()
     {
+        //Changer Vue Article
+        if (isset($_POST['changerVue'])) {
+            if ($_SESSION['vue_article'] == 0) {
+                $_SESSION['vue_article'] = 1;
+            } elseif ($_SESSION['vue_article'] == 1) {
+                $_SESSION['vue_article'] = 0;
+            }
+        }
+
         //Ajout article
         if (isset($_POST['add'], $_POST['nom'], $_POST['categorie'])) {
             $data = [

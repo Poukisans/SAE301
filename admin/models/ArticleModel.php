@@ -6,7 +6,25 @@ class ArticleModel extends Model
     // ==================================== LISTE ====================================
     public function getList()
     {
-        $sql = "SELECT id, nom, prix, miniature, affichage, categorie, lien FROM b_articles ORDER BY id DESC";
+        $sql = "SELECT a.id, a.nom, a.prix, a.miniature, a.affichage, a.categorie, a.lien,
+                CASE 
+                    WHEN p.id IS NOT NULL AND CURDATE() BETWEEN p.date_debut AND p.date_fin THEN 
+                        CASE 
+                            WHEN p.type = 0 THEN a.prix - (a.prix * p.promotion / 100)
+                            WHEN p.type = 1 THEN p.promotion
+                            WHEN p.type = 2 THEN 'lot'
+                            ELSE a.prix
+                        END
+                    ELSE null
+                END AS 'promotion'
+            FROM 
+                b_articles a
+            LEFT JOIN 
+                b_promotion_articles pa ON a.id = pa.id_article
+            LEFT JOIN 
+                b_promotions p ON pa.id_promotion = p.id
+            ORDER BY 
+                a.nom;"; 
         $statment = $this->executerRequete($sql);
         return $statment->fetchAll(PDO::FETCH_ASSOC);
     }

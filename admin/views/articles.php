@@ -1,6 +1,13 @@
 <div class="container-fluid">
     <!-- ================== BOUTONS ACTIONS ================== -->
-    <div class="my-3 d-flex flex-row justify-content-end">
+    <div class="my-3 d-flex flex-row justify-content-between">
+        <div class="d-flex flex-column mx-3 justify-content-center">
+            <form action="" method="POST">
+                <button type="submit" name="changerVue" class="btn btn-primary">
+                    Changer vue
+                </button>
+            </form>
+        </div>
         <!-- Nouvel Article -->
         <div class="d-flex flex-column mx-3 justify-content-center">
             <button type="button" class="btn btn-success w-100" data-toggle="modal" data-target="#add<?= $content['id'] ?>">
@@ -44,40 +51,117 @@
             </form>
         </div>
     </div>
+    <?php
+    if ($_SESSION['vue_article'] == 1) {
+    ?>
+        <!-- ================== LISTE IMG ================== -->
+        <div class="card">
+            <!-- /.card-header -->
+            <div class="row d-flex justify-content-around p-3">
+                <?php
+                foreach ($articleList as $content) {
+                ?>
+                    <div class="d-flex flex-row mx-2 mb-3">
+                        <a href="articles/<?= $content['lien'] ?>" class="d-flex flex-column bg-white shadow-sm rounded" style="cursor:pointer;">
+                            <?php
+                            if (isset($content['miniature'])) {
+                            ?>
+                                <img src="<?= BASE_URL ?><?= $content['miniature'] ?>" style="width: 200px; height:200px; object-fit:cover;">
+                            <?php
+                            } else {
+                            ?>
+                                <div class="bg-secondary d-flex justify-content-center align-items-center" style="width: 200px; height:200px;">
+                                    <p>Aucune miniature</p>
+                                </div>
+                            <?php
+                            }
+                            ?>
+                            <h6 class="my-3 mx-2 text-break"><?= $content['nom'] ?></h6>
+                        </a>
+                    </div>
+                <?php
+                }
+                ?>
 
-    <!-- ================== LISTE ================== -->
-    <div class="card card-danger">
-        <!-- /.card-header -->
-        <div class="row d-flex justify-content-around p-3">
-            <?php
-            foreach ($articleList as $content) {
-            ?>
-                <div class="d-flex flex-row mx-2 mb-3">
-                    <a href="articles/<?= $content['lien'] ?>" class="d-flex flex-column bg-white shadow-sm rounded" style="cursor:pointer;">
+
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- Fin carte -->
+    <?php
+    } elseif ($_SESSION['vue_article'] == 0) {
+    ?>
+        <!-- ================== LISTE ================== -->
+        <div class="card card-danger">
+            <!-- Contenu carte -->
+            <div class="card-body d-flex flex-column justify-content-between">
+                <!-- Informations  -->
+                <table id="table" class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Article</th>
+                            <th>Categorie</th>
+                            <th>Prix</th>
+                            <th>En vente</th>
+                            <th></th>                            
+                        </tr>
+                    </thead>
+                    <tbody>
                         <?php
-                        if (isset($content['miniature'])) {
+                        foreach ($articleList as $content) {
                         ?>
-                            <img src="<?= BASE_URL ?><?= $content['miniature'] ?>" style="width: 200px; height:200px; object-fit:cover;">
-                        <?php
-                        } else {
-                        ?>
-                            <div class="bg-secondary d-flex justify-content-center align-items-center" style="width: 200px; height:200px;">
-                                <p>Aucune miniature</p>
-                            </div>
+
+                            <tr>
+                                <td><?= $content['id'] ?></td>
+                                <td><?= $content['nom'] ?></td>
+                                <td><?= ucfirst($content['categorie']) ?></td>
+                                <td>
+                                    <?php
+                                    if (!empty($content['promotion'])) {
+                                    ?>
+                                        <span style="text-decoration: line-through;"><?= $content['prix']; ?> €</span>
+                                        &nbsp;
+                                        <b class="text-danger"><i class="fas fa-tags"></i> <?= number_format($content['promotion'], 2, '.', ''); ?> €</b>
+                                    <?php
+                                    } else {
+                                        echo $content['prix']." €";
+                                    }
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    if ($content['affichage'] == 0) {
+                                        echo "Non";
+                                    } elseif ($content['affichage'] == 1) {
+                                        echo "Oui";
+                                    }
+                                    ?>
+                                </td>
+                                <td style="vertical-align: middle; text-align: right; white-space: nowrap;">
+                                    <!-- Accéder -->
+                                    <a href="articles/<?= $content['lien'] ?>" role="button" class="btn btn-primary py-2">
+                                        <i class="fas fa-pen"></i>
+                                    </a>
+
+                                </td>
+
+                            </tr>
                         <?php
                         }
                         ?>
-                        <h6 class="my-3 mx-2 text-break"><?= $content['nom'] ?></h6>
-                    </a>
-                </div>
-            <?php
-            }
-            ?>
+                    </tbody>
+                </table>
 
 
+            </div>
         </div>
-        <!-- /.card-body -->
-    </div>
-    <!-- Fin carte -->
+        <!-- Fin carte -->
+    <?php
+    }
+    ?>
+
+
+
 
 </div>
