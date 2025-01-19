@@ -6,7 +6,7 @@ class ArticleModel extends Model
     // ==================================== LISTE ====================================
     public function getList()
     {
-        $sql = "SELECT a.id, a.nom, a.prix, a.miniature, a.affichage, a.categorie, a.lien,
+        $sql = "SELECT a.id, a.nom, a.prix, a.miniature, a.affichage, a.affichage_accueil, a.categorie, a.lien,
                 CASE 
                     WHEN p.id IS NOT NULL AND CURDATE() BETWEEN p.date_debut AND p.date_fin THEN 
                         CASE 
@@ -24,7 +24,7 @@ class ArticleModel extends Model
             LEFT JOIN 
                 b_promotions p ON pa.id_promotion = p.id
             ORDER BY 
-                a.nom;"; 
+                a.nom;";
         $statment = $this->executerRequete($sql);
         return $statment->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -175,6 +175,23 @@ class ArticleModel extends Model
             ]);
         } catch (PDOException $e) {
             throw new Exception("Erreur lors de la mise à jour en BDD: " . $e->getMessage());
+        }
+    }
+
+    // ==================================== AJOUT ====================================
+    public function setAffichageAccueil($affichage_accueil, $selected_articles)
+    {
+        try {
+            $sql = "UPDATE b_articles SET affichage_accueil = :affichage_accueil WHERE id = :id";
+
+            foreach ($selected_articles as $id) {
+                $this->executerRequete($sql, [
+                    ':id' => $id,
+                    ':affichage_accueil' => $affichage_accueil,
+                ]);
+            }
+        } catch (PDOException $e) {
+            throw new Exception("Erreur lors de la mise à jour en BDD : " . $e->getMessage());
         }
     }
 }
