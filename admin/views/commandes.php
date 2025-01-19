@@ -14,7 +14,7 @@
         <!-- Contenu carte -->
         <div class="card-body d-flex flex-column justify-content-between">
             <!-- Informations  -->
-            <div class="d-fle mb-3">
+            <div class="d-flex mb-3">
                 <form action="<?= $_GET['archive'] == 1  ? './commandes?archive=1' : './commandes' ?>" method="get" class="d-flex flex-row justify-content-between">
                     <div class="d-flex flex-row">
                         <button name="filter" value="0" class='mx-1 btn <?= isset($_GET['filter']) && $_GET['filter'] == 0 ? 'btn-danger' : 'btn-outline-danger' ?>'>Non traitée</button>
