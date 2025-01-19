@@ -32,7 +32,7 @@ class AccueilController extends Controller
 
         $this->_view = new View("views/" . $url . ".php", [
             'layoutContent' => $this->layoutContent,
-            'currentPage' => null,
+            'currentPage' => "Articles à la une",
             'articleList' => $articleList,
         ]);
     }

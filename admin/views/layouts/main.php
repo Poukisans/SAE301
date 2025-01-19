@@ -78,7 +78,6 @@
           <li class="mr-2">
             <a class="nav-link btn btn-light" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
           </li>
-          <li class="breadcrumb-item"><b><a href="./">Accueil</a></b></li>
           <?php
           if (!empty($currentPage)) {
           ?>
@@ -131,6 +130,14 @@
 
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+            <!-- article à la une -->
+            <li class="nav-item">
+              <a href="./accueil" class="nav-link <?= $currentContent == "accueil" ? "active" : "" ?>">
+                <i class="fas fa-home nav-icon"></i>
+                <p>À la une</p>
+              </a>
+            </li>
 
             <!-- article -->
             <li class="nav-item">

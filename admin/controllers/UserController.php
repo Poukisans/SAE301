@@ -31,7 +31,7 @@ class UserController extends Controller
     {
         $this->_view = new View("views/" . $url . ".php", [
             'layoutContent' => $this->layoutContent,
-            'currentPage' => 'Utilisateur',
+            'currentPage' => 'Paramètres utilisateur',
             'currentContent' => "utilisateur",
         ]);
     }
