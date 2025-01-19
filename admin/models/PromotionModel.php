@@ -57,6 +57,7 @@ class PromotionModel extends Model
         extract($data);
 
         try {
+            // Préparer et exécuter la requête d'insertion
             $sql = "INSERT INTO b_promotions (nom, type, date_debut, date_fin) VALUES (:nom, :type, :date_debut, :date_fin)";
             $this->executerRequete($sql, [
                 ':nom' => $nom,
@@ -64,10 +65,16 @@ class PromotionModel extends Model
                 ':date_debut' => $date_debut,
                 ':date_fin' => $date_fin,
             ]);
+
+            // Récupérer l'ID de la dernière insertion
+            $id_promotion = $this->getLastInsertId(); 
+            return $id_promotion; 
         } catch (PDOException $e) {
             throw new Exception("Erreur lors de la mise à jour en BDD: " . $e->getMessage());
         }
     }
+
+
 
     // ==================================== UPDATE INFO ====================================
     public function update($data)

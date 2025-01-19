@@ -85,11 +85,14 @@ class PromotionsController extends Controller
                 'date_debut' => $_POST['date_debut'],
                 'date_fin' => $_POST['date_fin']
             ];
-
+        
             if ($data['date_debut'] == $data['date_fin'] || strtotime($data['date_debut']) < strtotime($data['date_fin'])) {
                 try {
-                    $this->promotionModel->add($data);
+                    $id_promotion = $this->promotionModel->add($data);
                     $_SESSION['successMsg'] = "La promotion a bien été ajoutée.";
+                    $lien = "promotions/$id_promotion";
+                    header("Location: $lien");
+                    exit;
                 } catch (Exception $e) {
                     $_SESSION['errorMsg'] = "Erreur : " . $e->getMessage();
                 }
