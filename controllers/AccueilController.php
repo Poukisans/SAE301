@@ -6,6 +6,7 @@ class AccueilController extends Controller
 {
     private $_view;
     private $layoutContent;
+    private $articleModel;
 
     public function __construct($url)
     {
@@ -24,8 +25,13 @@ class AccueilController extends Controller
         $this->layoutContent = $this->getLayoutContent($url);
         $this->layoutContent['current_section'] = null; //Masquer "Accueil"
 
+        $this->articleModel = new ArticleModel;
+        $articleList = $this->articleModel->getList();
+
         $this->_view = new View("views/" . $url . ".php", [
             'layoutContent' => $this->layoutContent,
+            'articleList' => $articleList,
+
         ]);
     }
 }
