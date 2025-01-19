@@ -6,7 +6,7 @@ class CommandeModel extends Model
     // ==================================== LISTE ====================================
     public function getList($archive)
     {
-        $sql = "SELECT id, date, nom, prenom, statut FROM b_commandes WHERE archive = :archive ORDER BY id DESC";
+        $sql = "SELECT id, date, nom, prenom, statut, archive FROM b_commandes WHERE archive = :archive ORDER BY id DESC";
         $statment = $this->executerRequete($sql, [
             ':archive' => $archive,
         ]);
@@ -16,7 +16,7 @@ class CommandeModel extends Model
     // ==================================== LISTE FILTREE ====================================
     public function getFilteredList($action, $archive)
     {
-        $sql = "SELECT id, date, nom, prenom, statut FROM b_commandes WHERE statut = :action AND archive = :archive;";
+        $sql = "SELECT id, date, nom, prenom, statut, archive FROM b_commandes WHERE statut = :action AND archive = :archive;";
 
         $statment = $this->executerRequete($sql, [
             ':action' => $action,
@@ -52,7 +52,7 @@ class CommandeModel extends Model
         try {
             $sql = "UPDATE b_commandes SET statut = :statut WHERE id = :id";
             $this->executerRequete($sql, [
-                ':id' => $id,
+                ':id' => $id_commande,
                 ':statut' => $statut,
             ]);
         } catch (PDOException $e) {
@@ -84,6 +84,19 @@ class CommandeModel extends Model
             $sql = "UPDATE b_commandes SET archive = 0 WHERE id = :id";
             $this->executerRequete($sql, [
                 ':id' => $id,
+            ]);
+        } catch (PDOException $e) {
+            throw new Exception("Erreur lors de la mise à jour en BDD: " . $e->getMessage());
+        }
+    }
+
+    // ==================================== SUPPRESSION ====================================
+    public function delete($data)
+    {
+        try {
+            $sql = "DELETE FROM b_commandes WHERE id = :id ";
+            $this->executerRequete($sql, [
+                ':id' => $data,
             ]);
         } catch (PDOException $e) {
             throw new Exception("Erreur lors de la mise à jour en BDD: " . $e->getMessage());

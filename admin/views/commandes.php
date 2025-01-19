@@ -15,7 +15,7 @@
         <div class="card-body d-flex flex-column justify-content-between">
             <!-- Informations  -->
             <div class="d-fle mb-3">
-                <form action="<?=$_GET['archive'] == 1  ? './commandes?archive=1' : './commandes'?>" method="get" class="d-flex flex-row justify-content-between">
+                <form action="<?= $_GET['archive'] == 1  ? './commandes?archive=1' : './commandes' ?>" method="get" class="d-flex flex-row justify-content-between">
                     <div class="d-flex flex-row">
                         <button name="filter" value="0" class='mx-1 btn <?= isset($_GET['filter']) && $_GET['filter'] == 0 ? 'btn-danger' : 'btn-outline-danger' ?>'>Non traitée</button>
                         <button name="filter" value="1" class='mx-1 btn <?= isset($_GET['filter']) && $_GET['filter']  == 1 ? 'btn-warning' : 'btn-outline-warning' ?>'>Préparée</button>
@@ -67,15 +67,31 @@
                                 }
                                 ?>
                             </td>
-                            <td class="d-flex justify-content-end">
+                            <td style="vertical-align: middle; text-align: right; white-space: nowrap;">
                                 <!-- Archiver -->
-                                <form action="" method="post" class="m-0 p-0">
-                                    <button name="archive" value="<?=$content['id']?>" type="submit" class="btn btn-secondary mx-1"><i class="fas fa-archive"></i></button>
-                                </form>
+                                <?php if ($content['statut'] == 2 || $content['statut'] == 3): ?>
+                                    <form action="" method="post" style="display: inline-block; margin: 0;">
+                                        <input type="hidden" name="archive" value="<?= $content['archive'] ?>">
+                                        <button name="setArchive" value="<?= $content['id'] ?>" type="submit" class="btn btn-secondary py-2">
+                                            <?= $content['archive'] == 0 ? "<i class='fas fa-archive'></i>" : "<i class='fas fa-reply'></i>" ?>
+                                        </button>
+                                    </form>
+                                <?php endif; ?>
 
-                                <!-- Acceder a -->
-                                <a href="commandes/<?= $content['id'] ?>" role="button" class="btn btn-primary mx-1"> <i class="fas fa-external-link-alt mx-1"></i></a>
+                                <?php if ($content['archive'] == 1): ?>
+                                    <form action="" method="post" style="display: inline-block; margin: 0;">
+                                        <button name="delete" value="<?= $content['id'] ?>" type="submit" class="btn btn-danger py-2">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                <?php endif; ?>
+
+                                <!-- Accéder -->
+                                <a href="commandes/<?= $content['id'] ?>" role="button" class="btn btn-primary py-2">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
                             </td>
+
                         </tr>
                     <?php
                     }

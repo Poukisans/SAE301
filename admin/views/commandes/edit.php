@@ -93,9 +93,8 @@
                                 </div>
                                 <div class="modal-footer d-flex justify-content-end">
                                     <div>
-                                        <input type="hidden" name="id" value="<?= $commandeInfo['id'] ?>">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                        <button name="statut" value="<?= $articleInfo['id'] ?>" type="submit" class="btn btn-danger">Annuler commande</button>
+                                        <button name="cancel" value="<?= $commandeInfo['id']?>" type="submit" class="btn btn-danger">Annuler commande</button>
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +107,7 @@
     </div>
     <!-- Fin carte -->
 
-    <!-- ================== MODIFICATIONS ================== -->
+    <!-- ================== LISTE ARTICLES ================== -->
     <div class="card card-secondary color-palette-box mt-3">
         <!-- Titre carte -->
 

@@ -97,30 +97,56 @@ class CommandesController extends Controller
             }
         }
 
-        //Archiver
-        if (isset($_POST['archive'])) {
+        //Annulation commande
+        if (isset($_POST['cancel'])) {
             $data = [
-                'id' => $_POST['archive'],
+                'id_commande' => $_POST['cancel'],
+                'statut' => 3,
             ];
             try {
-                $this->commandeModel->archive($data);
-                $_SESSION['successMsg'] = "La commande a été archivée"; //Output
+                $this->commandeArticleModel->cancel($data);
+                $this->commandeModel->update($data);
+                $_SESSION['warnMsg'] = "La commande a été annulée"; //Output
             } catch (Exception $e) {
                 $_SESSION['errorMsg'] = "Erreur : " . $e->getMessage(); //Output
             }
         }
 
-        //Desarchiver
-        if (isset($_POST['unarchive'])) {
+        //Archiver
+        if (isset($_POST['setArchive'], $_POST['archive'])) {
+            $archive = $_POST['archive'];
             $data = [
-                'id' => $_POST['unarchive'],
+                'id' => $_POST['setArchive'],
             ];
+
+            if ($archive == 0) {
+                try {
+                    $this->commandeModel->archive($data);
+                    $_SESSION['successMsg'] = "La commande a été archivée"; //Output
+                } catch (Exception $e) {
+                    $_SESSION['errorMsg'] = "Erreur : " . $e->getMessage(); //Output
+                }
+            } elseif ($archive == 1) {
+                try {
+                    $this->commandeModel->unarchive($data);
+                    $_SESSION['successMsg'] = "La commande a été désarchivée"; //Output
+                } catch (Exception $e) {
+                    $_SESSION['errorMsg'] = "Erreur : " . $e->getMessage(); //Output
+                }
+            }
+        }
+
+        //Delete
+        if (isset($_POST['delete'])) {
+            $id = $_POST['delete'];
+
             try {
-                $this->commandeModel->unarchive($data);
-                $_SESSION['successMsg'] = "La commande a été retirée des archives"; //Output
+                $this->commandeModel->delete($id);
+                $_SESSION['successMsg'] = "La commande a bien été supprimée.";
             } catch (Exception $e) {
-                $_SESSION['errorMsg'] = "Erreur : " . $e->getMessage(); //Output
+                $_SESSION['errorMsg'] = "Erreur : " . $e->getMessage();
             }
         }
     }
 }
+var_dump($_POST);
