@@ -8,7 +8,7 @@ class PromotionModel extends Model
     {
         $sql = "SELECT id, nom, date_debut, date_fin, type
                 FROM b_promotions p
-                WHERE p.date_debut > NOW() AND p.date_fin > CURDATE();";
+                WHERE p.date_debut > CURDATE() AND p.date_fin > CURDATE();";
         $statment = $this->executerRequete($sql);
         return $statment->fetchAll(PDO::FETCH_ASSOC);
     }

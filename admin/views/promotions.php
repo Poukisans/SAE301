@@ -130,7 +130,7 @@
             <!-- Informations  -->
             <div class="list-group list-group-flush">
                 <?php
-                foreach ($promotionListCurrent as $content) {
+                foreach ($promotionListNext as $content) {
                 ?>
                     <div class="list-group-item py-2 px-0 d-flex flex-wrap justify-content-between" style="gap: 10px;">
                         <div class="d-flex flex-row flex-grow-1 align-items-start">

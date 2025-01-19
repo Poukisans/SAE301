@@ -127,7 +127,7 @@ class PromotionsController extends Controller
 
             try {
                 $this->promotionModel->delete($id);
-                $_SESSION['successMsg'] = "La promotion a bien été supprimée.";
+                $_SESSION['warnMsg'] = "La promotion a bien été supprimée.";
             } catch (Exception $e) {
                 $_SESSION['errorMsg'] = "Erreur : " . $e->getMessage();
             }
