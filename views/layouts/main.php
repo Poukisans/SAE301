@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="<?= $layoutContent['meta_desc'] ?>">
 
-    <base href="<?=BASE_URL?>">
+    <base href="<?= BASE_URL ?>">
 
     <link rel="stylesheet" href="assets/css/anim.css">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -16,47 +16,45 @@
     <script src="assets/js/main.js"></script>
 
     <!-- Inter Font -->
-    <link rel="stylesheet" href="https://use.typekit.net/lyz7vnt.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 
 <body class="inter_text">
     <header role="banner">
         <div class="navbar">
-            <div class="menu_logo white_text">
-                <button class="menu_button" id="menu_button" aria-label="Menu navigation">
-                    <span class="bg_menu_top"></span>
-                    <span class="bg_menu_down"></span>
-                </button>
-
-                <div class="current_page inter_secondary" id="current_page">
-                    <p>Menu <?= isset($layoutContent['current_section']) ? "| " . $layoutContent['current_section'] : "" ?></p>
-                </div>
-            </div>
-
             <h1 class="logo" id="logo">
                 <a href="./">
-                    <img class="logo_classic" src="assets/logo/logo_mezzanotte34.svg" alt="<?=SITE_NAME?>" aria-label="Logo <?=SITE_NAME?>">
-                    <img class="logo_mobile" src="assets/logo/logo_mezzanotte34_mini.svg" alt="<?=SITE_NAME?>" aria-label="Logo <?=SITE_NAME?>">
+                    <img class="logo_classic" src="assets/logo/Logo_Birbone.svg" alt="<?= SITE_NAME ?>" aria-label="Logo <?= SITE_NAME ?>">
+                    <!-- <img class="logo_mobile" src="assets/logo/logo_mezzanotte34_mini.svg" alt="<?= SITE_NAME ?>" aria-label="Logo <?= SITE_NAME ?>"> -->
                 </a>
             </h1>
+            <a href="./panier">
+                <img class="panier" src="assets/logo/panier.svg" alt="accédez au panier" aria-label="Icon de panier">
+                <!-- <img class="panier_mobile" src="assets/logo/panier.svg" alt="accédez au panier" aria-label="Icon de panier"> -->
+            </a>
+        </div>
+        <div class="navbar_down">
+            <div class="list_menu">
+                <?php
+                foreach ($layoutContent['sectionList'] as $section) {
+                    if ($section['affichage_nav'] == 1) { ?>
+                        <a class="link_nounderline a_menu" href=".<?= $section['lien'] ?>"><?= ($section['nom']) ?></a>
+                <?php
+                    }
+                };
+                ?>
+            </div>
+            <div class="search_filter row">
+                <form action="search_article" method="get">
+                    <input name="q" class="input_white inter_secondary" type="text" placeholder="Rechercher un article" aria-label="Rechercher un article">
+                    <button class="button_red inter_secondary" type="submit">Rechercher</button>
+                </form>
+            </div>
         </div>
     </header>
 
-    <aside role="navigation" class="menu dogma_other" id="menu">
-        <nav>
-            <ul>
-                <?php
-                foreach ($layoutContent['sectionList'] as $section) {
-                ?>
-                    <li>
-                        <a href=".<?= $section['lien'] ?>" class="uppercase"><?= $section["nom"] ?></a>
-                    </li>
-                <?php
-                }
-                ?>
-            </ul>
-        </nav>
-    </aside>
 
     <main role="main">
         <div class="banner_container">
@@ -74,12 +72,17 @@
         ?>
     </main>
 
-    <footer role="contentinfo" class="container inter_secondary white_text" aria-label="Footer site">
-
+    <footer role="contentinfo" class="container inter_secondary black_text" aria-label="Footer site">
+        <h1 class="logo_footer" id="logo">
+            <a href="./">
+                <img class="logo_classic" src="assets/logo/Logo_Birbone.svg" alt="<?= SITE_NAME ?>" aria-label="Logo <?= SITE_NAME ?>">
+                <!-- <img class="logo_mobile" src="assets/logo/logo_mezzanotte34_mini.svg" alt="<?= SITE_NAME ?>" aria-label="Logo <?= SITE_NAME ?>"> -->
+            </a>
+        </h1>
         <div class="row footer">
             <div class="row footer_links">
                 <div class="container plan_site">
-                    <h2 class="inter_title uppercase">
+                    <h2 class="inter_other uppercase mb">
                         Plan du site
                     </h2>
 
@@ -87,11 +90,13 @@
                         <ul>
                             <?php
                             foreach ($layoutContent['sectionList'] as $section) {
+                                if ($section['affichage_footer'] == 1) {
                             ?>
-                                <li>
-                                    <a class="link_nounderline" href=".<?= $section['lien'] ?>"><?= ($section['nom']) ?></a>
-                                </li>
+                                    <li>
+                                        <a class="link_nounderline" href=".<?= $section['lien'] ?>"><?= ($section['nom']) ?></a>
+                                    </li>
                             <?php
+                                }
                             }
                             ?>
                         </ul>
@@ -99,7 +104,7 @@
                 </div>
 
                 <div class="container socials">
-                    <h2 class="dogma_other uppercase" style="text-transform: uppercase;">
+                    <h2 class="inter_other uppercase mb" style="text-transform: uppercase;">
                         Réseaux sociaux
                     </h2>
                     <div class="list">
@@ -122,7 +127,7 @@
             <div class="row">
                 <a class="link_nounderline" href="./mentions-legales">Mentions légales</a>
             </div>
-            <div>© <?= SITE_NAME ?> - Tous droits réservés</div>
+            <div>© 2024-2025 <?= SITE_NAME ?> - Tous droits réservés</div>
         </div>
     </footer>
 </body>

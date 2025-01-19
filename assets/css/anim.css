@@ -31,8 +31,26 @@
 
 }
 
+/* ==== Bouton Noir Fond Clair ==== */
+.button_red:hover {
+    color: #FE1B00;
+    background-color: white;
+    transition: .3s;
+
+}
+
+/* ==== Bouton Noir Fond Clair ==== */
+.button_red_border:hover {
+    color: #FE1B00;
+    background-color: white;
+    transition: .3s;
+
+}
+
 .button_white_border,
 .button_white,
+.button_red_border,
+.button_red,
 .button_black,
 .button_black_border {
     transition: .3s;
@@ -60,8 +78,8 @@ input {
 
 .contact .button_black_border:hover {
     color: white;
-    background-color: #ee3a3a;
-    border-color: #ee3a3a;
+    background-color: #FE1B00;
+    border-color: #FE1B00;
     transition: .3s;
 
 }
@@ -186,7 +204,7 @@ input {
 /* Footer Link Hover */
 footer a:hover {
     text-decoration: underline;
-    color: #d7d7d7;
+    color: #FE1B00;
     transition: .3s
 }
 

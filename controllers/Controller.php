@@ -13,7 +13,7 @@ class Controller
         // Récupérer les sections
         $sectionModel = new SectionModel();
         $sectionList = $sectionModel->getList();
-        $sectionInfo = $sectionModel->getInfo("/" . $url);
+        $sectionInfo = $sectionModel->getInfo($url);
 
         // Récupérer les réseaux
         $socialModel = new SocialModel();
@@ -22,6 +22,7 @@ class Controller
         // Construire le tableau layoutContent
         $this->layoutContent = array(
             'sectionList' => $sectionList,
+            'banner' => $sectionInfo['banner'],
             'meta_desc' => $generalInfo['meta_desc'],
             'socialList' => $socialList,
         );
