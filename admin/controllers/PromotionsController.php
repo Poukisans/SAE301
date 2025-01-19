@@ -164,5 +164,3 @@ class PromotionsController extends Controller
         }
     }
 }
-
-var_dump($_POST);

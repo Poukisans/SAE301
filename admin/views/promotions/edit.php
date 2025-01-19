@@ -1,6 +1,3 @@
-<?php
-var_dump($_POST);
-?>
 <div class="container-fluid">
 
     <!-- ================== BOUTONS ACTIONS ================== -->
