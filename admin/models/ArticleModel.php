@@ -6,7 +6,19 @@ class ArticleModel extends Model
     // ==================================== LISTE ====================================
     public function getList()
     {
-        $sql = "SELECT id, nom, prix, miniature, affichage, lien FROM b_articles ORDER BY id DESC";
+        $sql = "SELECT id, nom, prix, miniature, affichage, categorie, lien FROM b_articles ORDER BY id DESC";
+        $statment = $this->executerRequete($sql);
+        return $statment->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // ==================================== LISTE ====================================
+    public function getListPromotion()
+    {
+        $sql = "SELECT b_articles.id, b_articles.nom, prix, affichage, categorie, lien, b_promotion_articles.*, b_promotions.date_debut, b_promotions.date_fin 
+                FROM b_articles
+                LEFT JOIN b_promotion_articles ON b_promotion_articles.id_article = b_articles.id
+                LEFT JOIN b_promotions ON b_promotion_articles.id_promotion = b_promotions.id
+                ORDER BY nom ASC";
         $statment = $this->executerRequete($sql);
         return $statment->fetchAll(PDO::FETCH_ASSOC);
     }

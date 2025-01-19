@@ -4,9 +4,29 @@ require_once 'Model.php';
 class PromotionModel extends Model
 {
     // ==================================== LISTE ====================================
-    public function getList()
+    public function getListNext()
     {
-        $sql = "SELECT id, nom, date_debut, date_fin FROM b_promotions";
+        $sql = "SELECT id, nom, date_debut, date_fin, type
+                FROM b_promotions p
+                WHERE p.date_debut > NOW() AND p.date_fin > CURDATE();";
+        $statment = $this->executerRequete($sql);
+        return $statment->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getListCurrent()
+    {
+        $sql = "SELECT id, nom, date_debut, date_fin, type
+                FROM b_promotions p
+                WHERE CURDATE() BETWEEN p.date_debut AND p.date_fin;";
+        $statment = $this->executerRequete($sql);
+        return $statment->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getListArchived()
+    {
+        $sql = "SELECT id, nom, date_debut, date_fin, type
+                FROM b_promotions p
+                WHERE p.date_fin < CURDATE();";
         $statment = $this->executerRequete($sql);
         return $statment->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -15,27 +35,11 @@ class PromotionModel extends Model
     public function getInfo($id)
     {
         $sql = "SELECT 
-                p.*,
-                CASE 
-                    WHEN p.id IS NOT NULL AND NOW() BETWEEN p.date_debut AND p.date_fin THEN 
-                        CASE 
-                            WHEN p.type = 0 THEN a.prix - (a.prix * p.promotion / 100)
-                            WHEN p.type = 1 THEN p.promotion
-                            WHEN p.type = 2 THEN 'lot'
-                            ELSE a.prix
-                        END
-                    ELSE null
-                END AS 'promotion'
+                *
             FROM 
-                b_promotions p
-            LEFT JOIN 
-                b_promotion_articles pa ON p.id = pa.id_promotion
-            LEFT JOIN 
-                b_articles a ON pa.id_article = a.id
+                b_promotions
             WHERE
-                p.id = 1
-            ORDER BY 
-                a.nom;";
+                id = :id;";
         $statment = $this->executerRequete($sql, [':id' => $id]);
 
         $content = $statment->fetch(PDO::FETCH_ASSOC);
@@ -48,13 +52,37 @@ class PromotionModel extends Model
     }
 
     // ==================================== AJOUT ====================================
-    public function add($id_article, $path)
+    public function add($data)
     {
+        extract($data);
+
         try {
-            $sql = "INSERT INTO b_article_photos (id_article, img_article) VALUES (:id_article, :img_article)";
+            $sql = "INSERT INTO b_promotions (nom, type, date_debut, date_fin) VALUES (:nom, :type, :date_debut, :date_fin)";
             $this->executerRequete($sql, [
-                ':id_article' => $id_article,
-                ':img_article' => $path
+                ':nom' => $nom,
+                ':type' => $type,
+                ':date_debut' => $date_debut,
+                ':date_fin' => $date_fin,
+            ]);
+        } catch (PDOException $e) {
+            throw new Exception("Erreur lors de la mise à jour en BDD: " . $e->getMessage());
+        }
+    }
+
+    // ==================================== UPDATE INFO ====================================
+    public function update($data)
+    {
+        extract($data);
+
+        try {
+            $sql = "UPDATE b_promotions SET nom = :nom, type = :type, promotion = :promotion, date_debut = :date_debut, date_fin = :date_fin WHERE id = :id";
+            $this->executerRequete($sql, [
+                ':id' => $id,
+                ':nom' => $nom,
+                ':type' => $type,
+                ':promotion' => $promotion,
+                ':date_debut' => $date_debut,
+                ':date_fin' => $date_fin,
             ]);
         } catch (PDOException $e) {
             throw new Exception("Erreur lors de la mise à jour en BDD: " . $e->getMessage());
@@ -65,7 +93,7 @@ class PromotionModel extends Model
     public function delete($id)
     {
         try {
-            $sql = "DELETE FROM b_article_photos WHERE id = :id ";
+            $sql = "DELETE FROM b_promotions WHERE id = :id ";
             $this->executerRequete($sql, [
                 ':id' => $id,
             ]);
