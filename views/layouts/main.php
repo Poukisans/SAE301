@@ -13,8 +13,6 @@
 
     <title><?= isset($layoutContent['current_section']) ? $layoutContent['current_section'] . " | " : "" ?><?= SITE_NAME ?></title>
 
-    <script src="assets/js/main.js"></script>
-
     <!-- Inter Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,7 +25,6 @@
             <h1 class="logo" id="logo">
                 <a href="./">
                     <img class="logo_classic" src="assets/logo/Logo_Birbone.svg" alt="<?= SITE_NAME ?>" aria-label="Logo <?= SITE_NAME ?>">
-                    <!-- <img class="logo_mobile" src="assets/logo/logo_mezzanotte34_mini.svg" alt="<?= SITE_NAME ?>" aria-label="Logo <?= SITE_NAME ?>"> -->
                 </a>
             </h1>
             <a href="./panier">
@@ -58,13 +55,7 @@
 
     <main role="main">
         <div class="banner_container">
-            <?php
-            if (!empty($layoutContent['banner'])) {
-            ?>
-                <img src="<?= $layoutContent['banner'] ?>" alt="Bannière page <?= isset($layoutContent['current_section']) ? $layoutContent['current_section'] : "Accueil" ?>">
-            <?php
-            }
-            ?>
+            
         </div>
 
         <?php
@@ -130,6 +121,7 @@
             <div>© 2024-2025 <?= SITE_NAME ?> - Tous droits réservés</div>
         </div>
     </footer>
+    <script src="assets/js/main.js"></script>
 </body>
 
 </html>
