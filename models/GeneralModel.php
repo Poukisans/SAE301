@@ -12,7 +12,14 @@ class GeneralModel extends Model
 
   public function getLegals()
   {
-    $sql = "SELECT mentions_legales,politique_confidentialite from m_general";
+    $sql = "SELECT mentions_legales,politique_confidentialite from b_general";
+    $statement = $this->executerRequete($sql);
+    return $statement->fetch(PDO::FETCH_ASSOC);
+  }
+
+  public function getContact()
+  {
+    $sql = "SELECT contact_title, contact from b_general";
     $statement = $this->executerRequete($sql);
     return $statement->fetch(PDO::FETCH_ASSOC);
   }

@@ -6,6 +6,7 @@ class ContactController extends Controller
 {
     private $_view;
     private $layoutContent;
+    private $generalModel;
 
     public function __construct($url)
     {
@@ -23,9 +24,13 @@ class ContactController extends Controller
         // ====== Contenu général du layout ======
         $this->layoutContent = $this->getLayoutContent($url);
 
+        // ====== Contenu contact ======
+        $this->generalModel = new GeneralModel;
+        $contactInfo = $this->generalModel->getContact();
+
         $this->_view = new View("views/" . $url . ".php", [
             'layoutContent' => $this->layoutContent,
-            'no_index' => 1,
+            'contactInfo' => $contactInfo,
         ]);
     }
 }
