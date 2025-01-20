@@ -722,20 +722,29 @@ header {
 
 .vue_article {
     display: grid;
-    grid-template-columns: 68% 30%;
+    grid-template-columns: 60% 40%;
     padding: 2vh 4vw;
 }
 
 .galerie_article {
-    display: grid;
-    grid-template-columns: 49% 49%;
+    display: flex;
     gap: 1.5%;
     margin-right: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 55vh;
+}
+
+.galerie_article .fleche {
+    justify-content: space-between;
+    width: 15%;
 }
 
 .image_article {
-    width: 100%;
+    width: auto;
     height: 100%;
+    max-height: 33rem;
 }
 
 .infos_row {

@@ -1,5 +1,6 @@
 <div class="bread_crumb">
-    <a class="grey" href="#">Accueil</a> > <a class="grey" href=".tee-shirts">Tee-shirts</a>
+    <a class="grey" href="#">Accueil</a> > <a class="grey" href="tee-shirts">Tee-shirts</a>
+    <?=!empty($currentCategory) ? "> <a class='grey' href='tee-shirts/".$currentCategor."'> ".ucfirst($currentCategory)."</a>" : ""?>
 </div>
 
 <div class="section_header container">

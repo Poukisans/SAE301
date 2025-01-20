@@ -7,6 +7,9 @@ class TeeShirtsController extends Controller
     private $_view;
     private $layoutContent;
     private $articleModel;
+    private $articleColorisModel;
+    private $articleCommentaireModel;
+    private $articlePhotosModel;
 
     public function __construct($url)
     {
@@ -64,6 +67,7 @@ class TeeShirtsController extends Controller
 
         $this->_view = new View("views/" . $url . ".php", [
             'layoutContent' => $this->layoutContent,
+            'currentCategory' => $categorie,
             'articleList' => $articleList,
         ]);
     }
@@ -71,6 +75,10 @@ class TeeShirtsController extends Controller
     private function pageArticle($url, $categorie, $article)
     {
         $this->articleModel = new ArticleModel();
+        $this->articleColorisModel = new ArticleColorisModel();
+        $this->articleCommentaireModel = new ArticleCommentaireModel();
+        $this->articlePhotosModel = new ArticlePhotoModel();
+
 
         // Vérifier si l'article existe
         try {
@@ -99,13 +107,32 @@ class TeeShirtsController extends Controller
             $previewInfo = null;
         }
 
+        $id_article = $articleInfo['id'];
+
+        //Article coloris
+        $articleColorisInfo = $this->articleColorisModel->getInfo($id_article);
+
+        //Article photos
+        $articlePhotosInfo = $this->articlePhotosModel->getInfo($id_article);
+
+         //Article commentaire
+         $articleCommentaireInfo = $this->articleCommentaireModel->getInfo($id_article);
+
+
+
+
         // ====== Contenu spécifique du layout ======
         $this->layoutContent = $this->getLayoutContent($url); // Récupérer le contenu général
 
         $this->_view = new View("views/" . $url . "_content.php", [
             'layoutContent' => $this->layoutContent,
+            'currentCategory' => $categorie,
+            'currentArticle' => $articleInfo['nom'],
             'previewInfo' => $previewInfo,
             'articleInfo' => $articleInfo,
+            'articleColorisInfo' => $articleColorisInfo,
+            'articlePhotosInfo' => $articlePhotosInfo,
+            'articleCommentaireInfo' => $articleCommentaireInfo,
         ]);
     }
 }
