@@ -3,7 +3,7 @@
     <!-- ================== BOUTONS ACTIONS ================== -->
     <div class="my-3 d-flex flex-row justify-content-end">
         <!-- Acceder a -->
-        <a href="<?= BASE_URL ?>articles/<?= $articleInfo['lien'] ?>" role="button" target="_blank" class="btn btn-primary h-100"> <i class="fas fa-external-link-alt mx-1"></i> &nbsp; Voir la page</a>
+        <a href="<?= BASE_URL ?>tee-shirts/<?= $articleInfo['categorie'] ?>/<?= $articleInfo['lien'] ?>" role="button" target="_blank" class="btn btn-primary h-100"> <i class="fas fa-external-link-alt mx-1"></i> &nbsp; Voir la page</a>
 
         <!-- Show/hide -->
         <form action="articles/<?= $articleInfo['lien'] ?>" method="POST" class="align-items-center justify-content-center d-flex mx-1">
