@@ -6,6 +6,7 @@ class FaqController extends Controller
 {
     private $_view;
     private $layoutContent;
+    private $faqModel;
 
     public function __construct($url)
     {
@@ -23,9 +24,13 @@ class FaqController extends Controller
         // ====== Contenu général du layout ======
         $this->layoutContent = $this->getLayoutContent($url);
 
+        // ====== Contenu faq ======
+        $this->faqModel = new FaqModel;
+        $faqInfo = $this->faqModel->getInfo();
+
         $this->_view = new View("views/" . $url . ".php", [
             'layoutContent' => $this->layoutContent,
-            'no_index' => 1,
+            'faqInfo' => $faqInfo,
         ]);
     }
 }
