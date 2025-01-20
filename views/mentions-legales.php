@@ -13,3 +13,4 @@
             <?= $legalInfo['mentions_legales'] ?>
         </div>
     </div>
+</section>
