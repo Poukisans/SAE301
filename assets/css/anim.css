@@ -1,0 +1,223 @@
+/* ====================== General ====================== */
+/* ==== Bouton Blanc Fond Clair ==== */
+.button_white_border:hover {
+    color: white;
+    background-color: black;
+    transition: .3s;
+}
+
+/* ==== Bonton Blanc Fond Foncé ==== */
+.button_white:hover {
+    color: white;
+    background-color: black;
+    border: 2px solid white;
+    transition: .3s;
+
+}
+
+/* ==== Bouton Noir Fond Clair ==== */
+.button_black:hover {
+    color: black;
+    background-color: white;
+    transition: .3s;
+
+}
+
+/* ==== Bouton Noir Fond Clair ==== */
+.button_black_border:hover {
+    color: black;
+    background-color: white;
+    transition: .3s;
+
+}
+
+/* ==== Bouton Noir Fond Clair ==== */
+.button_red:hover {
+    color: #FE1B00;
+    background-color: white;
+    transition: .3s;
+
+}
+
+/* ==== Bouton Noir Fond Clair ==== */
+.button_red_border:hover {
+    color: #FE1B00;
+    background-color: white;
+    transition: .3s;
+
+}
+
+.button_white_border,
+.button_white,
+.button_red_border,
+.button_red,
+.button_black,
+.button_black_border {
+    transition: .3s;
+}
+
+.input_black:focus {
+    background-color: white;
+    color: black;
+    transition: .3s;
+}
+
+.input_white:focus {
+    background-color: white;
+    transition: .3s;
+}
+
+input {
+    transition: .3s;
+}
+
+/* radio button */
+.checkbox-input:checked+.checkbox {
+    background-color: #fff;
+}
+
+.contact .button_black_border:hover {
+    color: white;
+    background-color: #FE1B00;
+    border-color: #FE1B00;
+    transition: .3s;
+
+}
+
+.link_underline {
+    transition: .3s;
+}
+
+.link_underline:hover {
+    text-underline-offset: 8px;
+    transition: .2s;
+}
+
+.link_nounderline:hover {
+    text-underline-offset: 8px;
+    transition: .2s;
+}
+
+/* ====================== FILM LIST ====================== */
+.film_list .film:hover {
+    border: 1px solid rgb(127, 127, 127);
+    transition: .6s ease;
+    z-index: 1;
+}
+
+.film_list .film {
+    transition: .3s ease;
+    border: 1px solid transparent;
+}
+
+.film_list a:hover .film_info {
+    opacity: 1;
+    transition: .3s ease;
+}
+
+.film_list a .film_info {
+    transition: .3s ease;
+}
+
+
+/* ====================== NAVBAR + MENU ====================== */
+/* Logo + Page active Scroll */
+.logo,
+.current_page {
+    transition: transform 0.2s linear;
+}
+
+.nav_hide {
+    transform: translateY(-200px);
+    transition: 0.6s ease;
+}
+
+/* Bouton Menu noir scroll */
+.menu_button_black span {
+    transition: 0.1s linear;
+    background-color: #000000 !important;
+}
+
+/* Bouton menu hover */
+.menu_button:hover .bg_menu_top {
+    transition: 0.1s ease;
+    transform-origin: 0% 100%;
+    transform: rotate(-20deg);
+}
+
+.menu_button .bg_menu_top {
+    transition: 0.2s linear;
+    transform-origin: 0% 100%;
+}
+
+/* Menu Bouton Clap */
+.open {
+    animation: menu_button_clap 0.6s ease forwards;
+    transform-origin: 0% 100%;
+}
+
+@keyframes menu_button_clap {
+    0% {
+        transform: rotate(-20deg);
+        transform-origin: 0% 100%;
+    }
+
+    10% {
+        transform: rotate(0deg);
+        transform-origin: 0% 100%;
+    }
+
+    100% {
+        transform: rotate(-20deg);
+        transform-origin: 0% 100%;
+    }
+}
+
+/* Menu Show/Hide */
+.menu_open {
+    opacity: 1 !important;
+    pointer-events: all !important;
+    transition: opacity 250ms ease, left 0ms 0ms ease;
+}
+
+.menu {
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 250ms ease, left 0ms 250ms ease;
+}
+
+/* Menu Link Hover */
+.menu a:hover {
+    padding-bottom: 4px;
+    border-bottom: 2px solid white;
+    transition: .2s;
+}
+
+.menu a {
+    border-bottom: 0px solid #000;
+    transition: .6s;
+}
+
+/* Materiel Presse */
+
+/* ====================== FOOTER ====================== */
+/* Footer Link Hover */
+footer a:hover {
+    text-decoration: underline;
+    color: #FE1B00;
+    transition: .3s
+}
+
+footer a {
+    transition: .3s
+}
+
+.footer .newsletter_info {
+    transition: .3s
+}
+
+.newsletter_input:focus-within .newsletter_info {
+    top: 0%;
+    opacity: 1;
+    transition: .3s;
+}
