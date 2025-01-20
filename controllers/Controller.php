@@ -22,6 +22,7 @@ class Controller
         // Construire le tableau layoutContent
         $this->layoutContent = array(
             'sectionList' => $sectionList,
+            'sectionNom' => $sectionInfo['nom'],
             'banner' => $sectionInfo['banner'],
             'meta_desc' => $generalInfo['meta_desc'],
             'socialList' => $socialList,
