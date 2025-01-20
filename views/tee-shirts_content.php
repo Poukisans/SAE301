@@ -74,7 +74,7 @@
                         <?php
                         } elseif ($articleInfo['type_promotion'] == 1) {
                         ?>
-                            <p class="prix_prom_details"><?= $articleInfo['promotion'] ?>€</p>
+                            <p class="prix_prom_details"><?= number_format($articleInfo['promotion'], 2) ?>€</p>
                             <p class="prix_barre_details"><?= $articleInfo['prix'] ?>€</p>
 
                         <?php

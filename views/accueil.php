@@ -42,7 +42,7 @@
                                 <?php
                                 } elseif ($content['type_promotion'] == 1) {
                                 ?>
-                                    <p class="prix_prom"><?= $content['promotion'] ?>€</p>
+                                    <p class="prix_prom"><?= number_format($content['promotion'], 2) ?>€</p>
                                     <p class="prix_barre"><?= $content['prix'] ?>€</p>
 
                                 <?php
@@ -105,7 +105,7 @@
                                 <?php
                                 } elseif ($content['type_promotion'] == 1) {
                                 ?>
-                                    <p class="prix_prom"><?= $content['promotion'] ?>€</p>
+                                    <p class="prix_prom"><?= number_format($content['promotion'], 2) ?>€</p>
                                     <p class="prix_barre"><?= $content['prix'] ?>€</p>
 
                                 <?php
