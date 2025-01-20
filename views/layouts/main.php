@@ -37,7 +37,7 @@
                 <?php
                 foreach ($layoutContent['sectionList'] as $section) {
                     if ($section['affichage_nav'] == 1) { ?>
-                        <a class="link_nounderline a_menu" href=".<?= $section['lien'] ?>"><?= ($section['nom']) ?></a>
+                        <a class="link_nounderline a_menu" href="<?= $section['lien'] ?>"><?= ($section['nom']) ?></a>
                 <?php
                     }
                 };
@@ -84,7 +84,7 @@
                                 if ($section['affichage_footer'] == 1) {
                             ?>
                                     <li>
-                                        <a class="link_nounderline" href=".<?= $section['lien'] ?>"><?= ($section['nom']) ?></a>
+                                        <a class="link_nounderline" href="<?= $section['lien'] ?>"><?= ($section['nom']) ?></a>
                                     </li>
                             <?php
                                 }
