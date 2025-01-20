@@ -37,8 +37,7 @@ class ArticleModel extends Model
             LEFT JOIN 
                 b_article_commentaires com ON com.id_article = a.id
             GROUP BY 
-                a.id, a.nom, a.prix, a.miniature, a.affichage, a.affichage_accueil, a.categorie, a.lien, 
-                p.type, p.promotion, p.id, p.date_debut, p.date_fin
+                a.id
             ORDER BY 
                 a.prix;";
         $statment = $this->executerRequete($sql);

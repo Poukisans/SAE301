@@ -44,7 +44,7 @@
                 ?>
             </div>
             <div class="search_filter row">
-                <form action="search_article" method="get">
+                <form action="recherche" method="get">
                     <input name="q" class="input_white inter_secondary" type="text" placeholder="Rechercher un article" aria-label="Rechercher un article">
                     <button class="button_red inter_secondary" type="submit">Rechercher</button>
                 </form>

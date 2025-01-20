@@ -22,7 +22,6 @@ class ArticleModel extends Model
                         CASE 
                             WHEN p.type = 0 THEN a.prix - (a.prix * p.promotion / 100)
                             WHEN p.type = 1 THEN p.promotion
-                            WHEN p.type = 2 THEN 'lot'
                             ELSE a.prix
                         END
                     ELSE NULL
@@ -40,8 +39,7 @@ class ArticleModel extends Model
             WHERE
                 a.affichage = 1
             GROUP BY 
-                a.id, a.nom, a.prix, a.miniature, a.affichage, a.affichage_accueil, a.categorie, a.lien, 
-                p.type, p.promotion, p.id, p.date_debut, p.date_fin
+                a.id
             ORDER BY 
                 a.prix;";
         $statment = $this->executerRequete($sql);
@@ -67,7 +65,6 @@ class ArticleModel extends Model
                         CASE 
                             WHEN p.type = 0 THEN a.prix - (a.prix * p.promotion / 100)
                             WHEN p.type = 1 THEN p.promotion
-                            WHEN p.type = 2 THEN 'lot'
                             ELSE a.prix
                         END
                     ELSE NULL
@@ -107,7 +104,6 @@ class ArticleModel extends Model
                         CASE 
                             WHEN p.type = 0 THEN a.prix - (a.prix * p.promotion / 100)
                             WHEN p.type = 1 THEN p.promotion
-                            WHEN p.type = 2 THEN 'lot'
                             ELSE a.prix
                         END
                     ELSE NULL
@@ -136,5 +132,53 @@ class ArticleModel extends Model
         }
 
         return $content;
+    }
+
+    // ==================================== RECHERCHE ====================================
+    public function search($query)
+    {
+        $sql = "SELECT 
+                a.id, 
+                a.nom, 
+                a.prix, 
+                a.miniature, 
+                a.affichage, 
+                a.affichage_accueil, 
+                a.categorie, 
+                a.lien, 
+                p.type AS type_promotion, 
+                p.promotion AS taux_promotion,
+                CASE 
+                    WHEN p.id IS NOT NULL AND CURDATE() BETWEEN p.date_debut AND p.date_fin THEN 
+                        CASE 
+                            WHEN p.type = 0 THEN a.prix - (a.prix * p.promotion / 100)
+                            WHEN p.type = 1 THEN p.promotion
+                            ELSE a.prix
+                        END
+                    ELSE NULL
+                END AS promotion,
+                COUNT(com.id) AS commentaire, -- Nombre total de commentaires pour l'article
+                ROUND(AVG(com.note), 2) AS note -- Moyenne des notes (arrondie à 2 décimales)
+            FROM 
+                b_articles a
+            LEFT JOIN 
+                b_promotion_articles pa ON a.id = pa.id_article
+            LEFT JOIN 
+                b_promotions p ON pa.id_promotion = p.id
+            LEFT JOIN 
+                b_article_commentaires com ON com.id_article = a.id
+            WHERE
+                a.affichage = 1 
+            AND (
+                REPLACE(LOWER(a.nom), ' ', '-') COLLATE utf8mb4_general_ci LIKE :query
+                OR REPLACE(LOWER(a.categorie), ' ', '-') COLLATE utf8mb4_general_ci LIKE :query
+            )
+            GROUP BY 
+                a.id
+            ORDER BY 
+                a.id;";
+
+        $statement = $this->executerRequete($sql, [':query' => $query]);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 }
