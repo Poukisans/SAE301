@@ -2,3 +2,4 @@
 .gitattributes
 config.php
 public/**
+admin/facture.php
