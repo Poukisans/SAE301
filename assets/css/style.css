@@ -866,8 +866,82 @@ header {
     margin-bottom: 2rem;
 }
 
-/* ============ CONTACT ============*/
+/* ============ PANIER ============*/
 
+.infos_article {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+}
+
+.image_panier {
+    width: 17rem;
+    height: 17rem;
+    aspect-ratio: 1/1;
+}
+
+.counter-container {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    padding: 0.2rem;
+    background-color: #EFEFF0;
+    transition: background-color 0.3s;
+}
+
+.counter-button {
+    background-color: #EFEFF0;
+    color: black;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.counter-button:hover {
+    color: #FE1B00;
+}
+
+.counter-value {
+    font-size: 1rem;
+    padding: 0.5rem;
+    background-color: #EFEFF0;
+    color: black;
+    transition: background-color 0.3s;
+}
+
+.header_panier {
+    display: grid;
+    grid-template-columns: 68% 30%;
+    padding: 1vh 4vw;
+}
+
+.recap_row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.7rem;
+    background-color: #EFEFF0;
+}
+
+.recap_row_total {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.7rem;
+}
+
+.small_text {
+    font-size: 1rem;
+}
+
+.grid_recap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
 
 /* ============ A PROPOS ============*/
 .a_propos {
