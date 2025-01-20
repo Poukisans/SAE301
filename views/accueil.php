@@ -71,6 +71,7 @@
         ?>
     </div>
 
+    <!-- A LA UNE -->
     <div class="section_header container">
         <div class="row title_container">
             <div class="title container">
@@ -85,59 +86,61 @@
     <div class="article_list">
         <?php
         foreach ($articleList as $content) {
+            if ($content['affichage_accueil'] == 1) {
         ?>
-            <div class="article">
-                <a class="nom_article" href="tee-shirts/<?= $content['categorie'] ?>/<?= $content['lien'] ?>">
-                    <img class="miniature" src="<?= $content['miniature'] ?>"></a>
-                <div class="article_text">
-                    <div class="nom_prix">
-                        <a class="nom_article" href="tee-shirts/<?= $content['categorie'] ?>/<?= $content['lien'] ?>"><?= $content['nom'] ?></a>
-                        <div class="container_prix">
-                            <?php
-                            if (!empty($content['promotion'])) {
-
-                                if ($content['type_promotion'] == 0) {
-                            ?>
-                                    <p class="prix_prom"><?= number_format($content['promotion'], 2) ?>€</p>
-                                    <p class="prix_barre"><?= $content['prix'] ?>€</p>
-                                    <p class="tag_solde">-<?= $content['taux_promotion'] ?>%</p>
-
+                <div class="article">
+                    <a class="nom_article" href="tee-shirts/<?= $content['categorie'] ?>/<?= $content['lien'] ?>">
+                        <img class="miniature" src="<?= $content['miniature'] ?>"></a>
+                    <div class="article_text">
+                        <div class="nom_prix">
+                            <a class="nom_article" href="tee-shirts/<?= $content['categorie'] ?>/<?= $content['lien'] ?>"><?= $content['nom'] ?></a>
+                            <div class="container_prix">
                                 <?php
-                                } elseif ($content['type_promotion'] == 1) {
-                                ?>
-                                    <p class="prix_prom"><?= number_format($content['promotion'], 2) ?>€</p>
-                                    <p class="prix_barre"><?= $content['prix'] ?>€</p>
+                                if (!empty($content['promotion'])) {
 
-                                <?php
-                                } elseif ($content['type_promotion'] == 2) {
+                                    if ($content['type_promotion'] == 0) {
                                 ?>
+                                        <p class="prix_prom"><?= number_format($content['promotion'], 2) ?>€</p>
+                                        <p class="prix_barre"><?= $content['prix'] ?>€</p>
+                                        <p class="tag_solde">-<?= $content['taux_promotion'] ?>%</p>
+
+                                    <?php
+                                    } elseif ($content['type_promotion'] == 1) {
+                                    ?>
+                                        <p class="prix_prom"><?= number_format($content['promotion'], 2) ?>€</p>
+                                        <p class="prix_barre"><?= $content['prix'] ?>€</p>
+
+                                    <?php
+                                    } elseif ($content['type_promotion'] == 2) {
+                                    ?>
+                                        <p class="prix"><?= $content['prix'] ?>€</p>
+                                    <?php
+                                    }
+                                } else {
+                                    ?>
                                     <p class="prix"><?= $content['prix'] ?>€</p>
                                 <?php
                                 }
-                            } else {
                                 ?>
-                                <p class="prix"><?= $content['prix'] ?>€</p>
-                            <?php
-                            }
-                            ?>
-                        </div>
-                    </div>
-                    <?php
-                    if (!empty($content['commentaire'])) {
-                    ?>
-                        <div class="note_avis">
-                            <div class="container_note">
-                                <div class="star"></div>
-                                <p class="note"><?= $content['note'] ?></p>
                             </div>
-                            <p class="avis"><?= $content['commentaire'] ?></p>
                         </div>
-                    <?php
-                    }
-                    ?>
+                        <?php
+                        if (!empty($content['commentaire'])) {
+                        ?>
+                            <div class="note_avis">
+                                <div class="container_note">
+                                    <div class="star"></div>
+                                    <p class="note"><?= $content['note'] ?></p>
+                                </div>
+                                <p class="avis"><?= $content['commentaire'] ?></p>
+                            </div>
+                        <?php
+                        }
+                        ?>
+                    </div>
                 </div>
-            </div>
         <?php
+            }
         }
         ?>
     </div>
