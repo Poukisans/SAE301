@@ -1,8 +1,3 @@
-<div class="bread_crumb">
-    <a class="grey" href="#">Accueil</a> > 
-    <a class="grey" href="<?= $layoutContent['current_section'] ?>"><?= $layoutContent['current_section'] ?></a>
-</div>
-
 <section role="section">
     <div class="section_header container">
         <div class="row title_container">
