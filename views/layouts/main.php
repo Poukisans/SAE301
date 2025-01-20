@@ -11,6 +11,13 @@
     <link rel="stylesheet" href="assets/css/anim.css">
     <link rel="stylesheet" href="assets/css/style.css">
 
+    <link rel="icon" type="image/png" href="assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Panel | <?= SITE_NAME ?>" />
+    <link rel="manifest" href="assets/favicon/site.webmanifest" />
+
     <title><?= isset($layoutContent['current_section']) ? $layoutContent['current_section'] . " | " : "" ?><?= SITE_NAME ?></title>
 
     <!-- Inter Font -->
@@ -55,7 +62,7 @@
 
     <main role="main">
         <div class="banner_container">
-            
+
         </div>
 
         <?php

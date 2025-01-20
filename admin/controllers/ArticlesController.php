@@ -296,7 +296,7 @@ class ArticlesController extends Controller
             $uploaded_image = $_FILES['photo_article']['name'];
             $file_tmp = $_FILES['photo_article']['tmp_name'];
 
-            $path = $this->FilePath . $id . DIRECTORY_SEPARATOR; //Génère le chemin du fichier
+            $path = $this->FilePath . $id_article . DIRECTORY_SEPARATOR; //Génère le chemin du fichier
 
             $extension = pathinfo($uploaded_image, PATHINFO_EXTENSION); // Récupère l'extension du fichier
             $file_name = $id . "img" . uniqid() . '.' . $extension; // Génère un nom unique
