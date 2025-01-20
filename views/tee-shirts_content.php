@@ -2,7 +2,7 @@
     <a class="grey" href="#">Accueil</a>
     > <a class="grey" href="tee-shirts">Tee-shirts</a>
     > <a class="grey" href="tee-shirts/<?= $currentCategory ?>"><?= ucfirst($currentCategory) ?></a>
-    > <a class="grey" href="tee-shirts/<?= $currentArticle ?>"><?= ucfirst($currentArticle) ?></a>
+    > <a class="grey" href="tee-shirts/<?= $articleInfo['categorie'] ?>/<?= $articleInfo['lien'] ?>"><?= ucfirst($currentArticle) ?></a>
 </div>
 
 <section role="section">
