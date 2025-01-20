@@ -13,7 +13,11 @@ class TeeShirtsController extends Controller
 
     public function __construct($url)
     {
-        parent::__construct($url[0]); // Appeler le constructeur de la classe parente pour initialiser les informations générales
+        if (isset($url[1])) {
+            $cat = "/" . $url[1];
+        }
+        $const = $url[0] . $cat;
+        parent::__construct($const); // Appeler le constructeur de la classe parente pour initialiser les informations générales
 
         if ($url[0] === "tee-shirts") {
             if (count($url) > 3) {
@@ -115,14 +119,12 @@ class TeeShirtsController extends Controller
         //Article photos
         $articlePhotosInfo = $this->articlePhotosModel->getInfo($id_article);
 
-         //Article commentaire
-         $articleCommentaireInfo = $this->articleCommentaireModel->getInfo($id_article);
-
-
-
+        //Article commentaire
+        $articleCommentaireInfo = $this->articleCommentaireModel->getInfo($id_article);
 
         // ====== Contenu spécifique du layout ======
-        $this->layoutContent = $this->getLayoutContent($url); // Récupérer le contenu général
+        $this->layoutContent = $this->getLayoutContent(); // Récupérer le contenu général
+        $this->layoutContent['current_section'] = $articleInfo['nom'];
 
         $this->_view = new View("views/" . $url . "_content.php", [
             'layoutContent' => $this->layoutContent,

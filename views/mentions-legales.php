@@ -1,8 +1,13 @@
+<div class="bread_crumb">
+    <a class="grey" href="#">Accueil</a> > 
+    <a class="grey" href="<?= $layoutContent['current_section'] ?>"><?= $layoutContent['current_section'] ?></a>
+</div>
+
 <section role="section">
     <div class="section_header container">
         <div class="row title_container">
             <div class="banner_sup">
-                <h3 class="inter_title banner_text"><?= $layoutContent['sectionNom'] ?></h3>
+                <h3 class="inter_title banner_text"><?= $layoutContent['current_section'] ?></h3>
                 <img class="img_banner" src="<?= $layoutContent['banner'] ?>" alt="">
             </div>
         </div>
@@ -10,6 +15,6 @@
 
     <div class="text">
         <div class="text_part mb">
-            <?=$legalInfo['mentions_legales']?>
+            <?= $legalInfo['mentions_legales'] ?>
         </div>
     </div>

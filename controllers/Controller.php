@@ -5,7 +5,6 @@ class Controller
 
     protected function __construct($url)
     {
-
         // Récupérer les informations générales
         $generalModel = new GeneralModel();
         $generalInfo = $generalModel->getInfo();
@@ -22,7 +21,7 @@ class Controller
         // Construire le tableau layoutContent
         $this->layoutContent = array(
             'sectionList' => $sectionList,
-            'sectionNom' => $sectionInfo['nom'],
+            'current_section' => $sectionInfo['nom'],
             'banner' => $sectionInfo['banner'],
             'meta_desc' => $generalInfo['meta_desc'],
             'socialList' => $socialList,
