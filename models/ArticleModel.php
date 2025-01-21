@@ -258,7 +258,6 @@ class ArticleModel extends Model
         ]);
         
         $article = $statment->fetch(PDO::FETCH_ASSOC);
-        print_r($article);
     
         // Vérification que l'article existe dans la base de données
         if ($article) {
