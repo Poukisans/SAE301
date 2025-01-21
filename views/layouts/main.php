@@ -34,7 +34,8 @@
                     <img class="logo_classic" src="assets/logo/Logo_Birbone.svg" alt="<?= SITE_NAME ?>" aria-label="Logo <?= SITE_NAME ?>">
                 </a>
             </h1>
-            <a href="./panier">
+            <a href="./panier" style="display:flex; align-items:center;">
+                <b class="inter_other_2" style="margin: 10px 5px 0px 0px;"> <?= isset($_SESSION['basket']) && $_SESSION['basket'] !== 0 ? count($_SESSION['basket']) : "" ?></b>
                 <img class="panier" src="assets/logo/panier.svg" alt="accédez au panier" aria-label="Icon de panier">
                 <!-- <img class="panier_mobile" src="assets/logo/panier.svg" alt="accédez au panier" aria-label="Icon de panier"> -->
             </a>
