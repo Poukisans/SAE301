@@ -19,6 +19,12 @@ class TeeShirtsController extends Controller
         $const = $url[0] . $cat;
         parent::__construct($const); // Appeler le constructeur de la classe parente pour initialiser les informations générales
 
+        // Vérification si des données POST sont présentes
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->articleModel = new ArticleModel();
+            $this->handlePostRequest();
+        }
+
         if ($url[0] === "tee-shirts") {
             if (count($url) > 3) {
                 throw new Exception('Page not found');
@@ -65,9 +71,22 @@ class TeeShirtsController extends Controller
         // ====== Contenu général layout ======
         $this->layoutContent = $this->getLayoutContent($url); // Récupérer le contenu général
 
+        $order = "ASC";
+
+        if (isset($_GET['filtre'])) {
+            switch ($_GET['filtre']) {
+                case "croissant":
+                    $order = "ASC";
+                    break;
+                case "decroissant":
+                    $order = "DESC";
+                    break;
+            }
+        }
+
         // ====== Contenu de la page ======
         $this->articleModel = new ArticleModel();
-        $articleList = $this->articleModel->getListCategory($categorie);
+        $articleList = $this->articleModel->getListCategory($categorie, $order);
 
         $this->_view = new View("views/" . $url . ".php", [
             'layoutContent' => $this->layoutContent,
@@ -136,5 +155,20 @@ class TeeShirtsController extends Controller
             'articlePhotosInfo' => $articlePhotosInfo,
             'articleCommentaireInfo' => $articleCommentaireInfo,
         ]);
+    }
+
+    private function handlePostRequest()
+    {
+        if (isset($_POST['addBasket'], $_POST['coloris'], $_POST['taille'])) {
+            $quantite = isset($_POST['quantite']) ? $_POST['quantite'] : 1;
+
+            $data = [
+                'id_article' => $_POST['addBasket'],
+                'coloris' => $_POST['coloris'],
+                'taille' => $_POST['taille'],
+                'quantite' => $quantite
+            ];
+            $this->articleModel->getBasket($data);
+        }
     }
 }

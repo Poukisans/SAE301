@@ -19,60 +19,55 @@
     <div class="article_list">
         <?php
         foreach ($articlePromoList as $content) {
-            if (!empty($content['promotion'])) {
+            if (!is_null($content['type_promotion'])) {
+                if ($content['type_promotion'] == 0) {
         ?>
-                <div class="article">
-                    <a class="nom_article" href="tee-shirts/<?= $content['categorie'] ?>/<?= $content['lien'] ?>">
-                        <img class="miniature" src="<?= $content['miniature'] ?>"></a>
-                    <div class="article_text">
-                        <div class="nom_prix">
-                            <a class="nom_article" href="tee-shirts/<?= $content['categorie'] ?>/<?= $content['lien'] ?>"><?= $content['nom'] ?></a>
-                            <div class="container_prix">
-                                <?php
-                                if (!empty($content['promotion'])) {
-
-                                    if ($content['type_promotion'] == 0) {
-                                ?>
-                                        <p class="prix_prom"><?= number_format($content['promotion'], 2) ?>€</p>
-                                        <p class="prix_barre"><?= $content['prix'] ?>€</p>
+                    <div class="article">
+                        <a class="nom_article" href="tee-shirts/<?= $content['categorie'] ?>/<?= $content['lien'] ?>">
+                            <img class="miniature" src="<?= $content['miniature'] ?>"></a>
+                        <div class="article_text">
+                            <div class="nom_prix">
+                                <a class="nom_article" href="tee-shirts/<?= $content['categorie'] ?>/<?= $content['lien'] ?>"><?= $content['nom'] ?></a>
+                                <div class="container_prix">
+                                    <?php
+                                    if ($content['type_promotion'] == 0 && !is_null($content['type_promotion'])) {
+                                    ?>
+                                        <p class="prix_prom"><?= $content['prix'] ?>€</p>
+                                        <p class="prix_barre"><?= $content['prix_origine'] ?>€</p>
                                         <p class="tag_solde">-<?= $content['taux_promotion'] ?>%</p>
 
                                     <?php
-                                    } elseif ($content['type_promotion'] == 1) {
+                                    } elseif ($content['type_promotion'] == 1 && !is_null($content['type_promotion'])) {
                                     ?>
-                                        <p class="prix_prom"><?= number_format($content['promotion'], 2) ?>€</p>
-                                        <p class="prix_barre"><?= $content['prix'] ?>€</p>
-
+                                        <p class="prix_prom"><?= $content['prix'] ?>€</p>
+                                        <p class="prix_barre"><?= $content['prix_origine'] ?>€</p>
                                     <?php
-                                    } elseif ($content['type_promotion'] == 2) {
+
+                                    } else {
                                     ?>
                                         <p class="prix"><?= $content['prix'] ?>€</p>
                                     <?php
                                     }
-                                } else {
                                     ?>
-                                    <p class="prix"><?= $content['prix'] ?>€</p>
-                                <?php
-                                }
-                                ?>
-                            </div>
-                        </div>
-                        <?php
-                        if (!empty($content['commentaire'])) {
-                        ?>
-                            <div class="note_avis">
-                                <div class="container_note">
-                                    <div class="star"></div>
-                                    <p class="note"><?= $content['note'] ?></p>
                                 </div>
-                                <p class="avis"><?= $content['commentaire'] ?></p>
                             </div>
-                        <?php
-                        }
-                        ?>
+                            <?php
+                            if (!empty($content['commentaire'])) {
+                            ?>
+                                <div class="note_avis">
+                                    <div class="container_note">
+                                        <div class="star"></div>
+                                        <p class="note"><?= $content['note'] ?></p>
+                                    </div>
+                                    <p class="avis"><?= $content['commentaire'] ?></p>
+                                </div>
+                            <?php
+                            }
+                            ?>
+                        </div>
                     </div>
-                </div>
         <?php
+                }
             }
         }
         ?>
@@ -88,61 +83,56 @@
 
     <div class="article_list">
         <?php
-        foreach ($articleOffreList as $content) {
-            if (!empty($content['promotion'])) {
+        foreach ($articlePromoList as $content) {
+            if (!is_null($content['type_promotion'])) {
+                if ($content['type_promotion'] == 1) {
         ?>
-                <div class="article">
-                    <a class="nom_article" href="tee-shirts/<?= $content['categorie'] ?>/<?= $content['lien'] ?>">
-                        <img class="miniature" src="<?= $content['miniature'] ?>"></a>
-                    <div class="article_text">
-                        <div class="nom_prix">
-                            <a class="nom_article" href="tee-shirts/<?= $content['categorie'] ?>/<?= $content['lien'] ?>"><?= $content['nom'] ?></a>
-                            <div class="container_prix">
-                                <?php
-                                if (!empty($content['promotion'])) {
-
-                                    if ($content['type_promotion'] == 0) {
-                                ?>
-                                        <p class="prix_prom"><?= number_format($content['promotion'], 2) ?>€</p>
-                                        <p class="prix_barre"><?= $content['prix'] ?>€</p>
+                    <div class="article">
+                        <a class="nom_article" href="tee-shirts/<?= $content['categorie'] ?>/<?= $content['lien'] ?>">
+                            <img class="miniature" src="<?= $content['miniature'] ?>"></a>
+                        <div class="article_text">
+                            <div class="nom_prix">
+                                <a class="nom_article" href="tee-shirts/<?= $content['categorie'] ?>/<?= $content['lien'] ?>"><?= $content['nom'] ?></a>
+                                <div class="container_prix">
+                                    <?php
+                                    if ($content['type_promotion'] == 0 && !is_null($content['type_promotion'])) {
+                                    ?>
+                                        <p class="prix_prom"><?= $content['prix'] ?>€</p>
+                                        <p class="prix_barre"><?= $content['prix_origine'] ?>€</p>
                                         <p class="tag_solde">-<?= $content['taux_promotion'] ?>%</p>
 
                                     <?php
-                                    } elseif ($content['type_promotion'] == 1) {
+                                    } elseif ($content['type_promotion'] == 1 && !is_null($content['type_promotion'])) {
                                     ?>
-                                        <p class="prix_prom"><?= number_format($content['promotion'], 2) ?>€</p>
-                                        <p class="prix_barre"><?= $content['prix'] ?>€</p>
-
+                                        <p class="prix_prom"><?= $content['prix'] ?>€</p>
+                                        <p class="prix_barre"><?= $content['prix_origine'] ?>€</p>
                                     <?php
-                                    } elseif ($content['type_promotion'] == 2) {
+
+                                    } else {
                                     ?>
                                         <p class="prix"><?= $content['prix'] ?>€</p>
                                     <?php
                                     }
-                                } else {
                                     ?>
-                                    <p class="prix"><?= $content['prix'] ?>€</p>
-                                <?php
-                                }
-                                ?>
-                            </div>
-                        </div>
-                        <?php
-                        if (!empty($content['commentaire'])) {
-                        ?>
-                            <div class="note_avis">
-                                <div class="container_note">
-                                    <div class="star"></div>
-                                    <p class="note"><?= $content['note'] ?></p>
                                 </div>
-                                <p class="avis"><?= $content['commentaire'] ?></p>
                             </div>
-                        <?php
-                        }
-                        ?>
+                            <?php
+                            if (!empty($content['commentaire'])) {
+                            ?>
+                                <div class="note_avis">
+                                    <div class="container_note">
+                                        <div class="star"></div>
+                                        <p class="note"><?= $content['note'] ?></p>
+                                    </div>
+                                    <p class="avis"><?= $content['commentaire'] ?></p>
+                                </div>
+                            <?php
+                            }
+                            ?>
+                        </div>
                     </div>
-                </div>
         <?php
+                }
             }
         }
         ?>

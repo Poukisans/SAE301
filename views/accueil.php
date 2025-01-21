@@ -23,7 +23,7 @@
     <div class="article_list">
         <?php
         foreach ($articleList as $content) {
-            if (!empty($content['promotion'] && $content['type_promotion'] != 2)) {
+            if (!is_null($content['type_promotion'])) {
         ?>
                 <div class="article">
                     <a class="nom_article" href="tee-shirts/<?= $content['categorie'] ?>/<?= $content['lien'] ?>">
@@ -33,18 +33,22 @@
                             <a class="nom_article" href="tee-shirts/<?= $content['categorie'] ?>/<?= $content['lien'] ?>"><?= $content['nom'] ?></a>
                             <div class="container_prix">
                                 <?php
-                                if ($content['type_promotion'] == 0) {
+                                if ($content['type_promotion'] == 0 && !is_null($content['type_promotion'])) {
                                 ?>
-                                    <p class="prix_prom"><?= number_format($content['promotion'], 2) ?>€</p>
-                                    <p class="prix_barre"><?= $content['prix'] ?>€</p>
+                                    <p class="prix_prom"><?= $content['prix'] ?>€</p>
+                                    <p class="prix_barre"><?= $content['prix_origine'] ?>€</p>
                                     <p class="tag_solde">-<?= $content['taux_promotion'] ?>%</p>
 
                                 <?php
-                                } elseif ($content['type_promotion'] == 1) {
+                                } elseif ($content['type_promotion'] == 1 && !is_null($content['type_promotion'])) {
                                 ?>
-                                    <p class="prix_prom"><?= number_format($content['promotion'], 2) ?>€</p>
-                                    <p class="prix_barre"><?= $content['prix'] ?>€</p>
+                                    <p class="prix_prom"><?= $content['prix'] ?>€</p>
+                                    <p class="prix_barre"><?= $content['prix_origine'] ?>€</p>
+                                <?php
 
+                                } else {
+                                ?>
+                                    <p class="prix"><?= $content['prix'] ?>€</p>
                                 <?php
                                 }
                                 ?>
@@ -96,28 +100,21 @@
                             <a class="nom_article" href="tee-shirts/<?= $content['categorie'] ?>/<?= $content['lien'] ?>"><?= $content['nom'] ?></a>
                             <div class="container_prix">
                                 <?php
-                                if (!empty($content['promotion'])) {
-
-                                    if ($content['type_promotion'] == 0) {
+                                if ($content['type_promotion'] == 0 && !is_null($content['type_promotion'])) {
                                 ?>
-                                        <p class="prix_prom"><?= number_format($content['promotion'], 2) ?>€</p>
-                                        <p class="prix_barre"><?= $content['prix'] ?>€</p>
-                                        <p class="tag_solde">-<?= $content['taux_promotion'] ?>%</p>
+                                    <p class="prix_prom"><?= $content['prix'] ?>€</p>
+                                    <p class="prix_barre"><?= $content['prix_origine'] ?>€</p>
+                                    <p class="tag_solde">-<?= $content['taux_promotion'] ?>%</p>
 
-                                    <?php
-                                    } elseif ($content['type_promotion'] == 1) {
-                                    ?>
-                                        <p class="prix_prom"><?= number_format($content['promotion'], 2) ?>€</p>
-                                        <p class="prix_barre"><?= $content['prix'] ?>€</p>
+                                <?php
+                                } elseif ($content['type_promotion'] == 1 && !is_null($content['type_promotion'])) {
+                                ?>
+                                    <p class="prix_prom"><?= $content['prix'] ?>€</p>
+                                    <p class="prix_barre"><?= $content['prix_origine'] ?>€</p>
+                                <?php
 
-                                    <?php
-                                    } elseif ($content['type_promotion'] == 2) {
-                                    ?>
-                                        <p class="prix"><?= $content['prix'] ?>€</p>
-                                    <?php
-                                    }
                                 } else {
-                                    ?>
+                                ?>
                                     <p class="prix"><?= $content['prix'] ?>€</p>
                                 <?php
                                 }

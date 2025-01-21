@@ -32,24 +32,26 @@
                 <p class="coloris">Coloris</p>
                 <p id="nom_coloris" class="couleur"> </p>
             </div>
-            <form class="column" action="commande" method="post">
+            <form class="column" action="" method="post">
                 <div class="infos_row">
                     <?php
+                    $first = true;
                     foreach ($articleColorisInfo as $coloris) {
                     ?>
                         <label class="row" for="<?= $coloris['nom'] ?>">
-                            <input type="radio" name="coloris" id="<?= $coloris['nom'] ?>" value="<?= $coloris['id'] ?>" hidden="" <?= $first ? 'checked' : '' ?> class="checkbox-input">
+                            <input type="radio" name="coloris" id="<?= $coloris['nom'] ?>" hidden value="<?= $coloris['id'] ?>"  <?= $first ? 'checked' : '' ?> class="checkbox-input">
                             <span class="checkbox" style="background-color: <?= $coloris['coloris'] ?>;"></span>
                         </label>
                     <?php
+                        $first = false;
                     }
                     ?>
                 </div>
                 <div>
                     <p class="coloris mb">Taille</p>
                     <div class="custom_taille">
-                        <select name="taille" id="taille">
-                            <option value="null" selected="selected">Choisir</option>
+                        <select name="taille" required id="taille">
+                            <option value="" selected="selected">Choisir une taille</option>
                             <option value="1">XXS</option>
                             <option value="2">XS</option>
                             <option value="3">S</option>
@@ -91,7 +93,7 @@
                     ?>
                 </div>
                 <div class="infos_row">
-                    <button type="submit" class="button_red large">Ajouter au panier</button>
+                    <button type="submit" name="addBasket" value="<?= $articleInfo['id'] ?>" class="button_red large">Ajouter au panier</button>
                 </div>
             </form>
         </div>
