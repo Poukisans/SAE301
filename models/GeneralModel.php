@@ -17,6 +17,13 @@ class GeneralModel extends Model
     return $statement->fetch(PDO::FETCH_ASSOC);
   }
 
+  public function getPresentation()
+  {
+    $sql = "SELECT presentation from b_general";
+    $statement = $this->executerRequete($sql);
+    return $statement->fetch(PDO::FETCH_ASSOC);
+  }
+
   public function getContact()
   {
     $sql = "SELECT contact_title, contact from b_general";
