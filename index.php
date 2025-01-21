@@ -7,6 +7,10 @@ class Router
 
     public function routeReq()
     {
+        if (is_null($_SESSION['basket'])) {
+            $_SESSION['basket'];
+        }
+
         try {
             // Autoload des classes
             spl_autoload_register(function ($class) {
