@@ -12,82 +12,84 @@
         <div class="column">
 
             <div class="infos_article">
-                <p class="inter_other2 grey b"><?= count($_SESSION['basket']) ?> articles</p>
+                <p class="inter_other2 grey b"><?= isset($_SESSION['basket']) ? count($_SESSION['basket']) : "0" ?> articles</p>
 
                 <?php
-                foreach ($_SESSION['basket'] as $content) {
+                if (isset($_SESSION['basket'])) {
+                    foreach ($_SESSION['basket'] as $content) {
                 ?>
 
-                    <div class="infos_row mb">
-                        <img class="image_panier" src="<?= $content['miniature'] ?>" alt="">
-                        <div class="infos_article">
-                            <div class="nom_prix">
-                                <a class="nom_article mb" href="tee-shirts/<?= $content['categorie'] ?>/<?= $content['lien'] ?>"><?= $content['nom'] ?></a>
-                                <p class="inter_text grey">Coloris : <?= $content['coloris'] ?></p>
-                                <p class="inter_text grey mb">Taille :
-                                    <?php
-                                    switch ($content['taille']) {
-                                        case 1:
-                                            echo "XXS";
-                                            break;
-                                        case 2:
-                                            echo "XS";
-                                            break;
-                                        case 3:
-                                            echo "S";
-                                            break;
-                                        case 4:
-                                            echo "M";
-                                            break;
-                                        case 5:
-                                            echo "L";
-                                            break;
-                                        case 6:
-                                            echo "XL";
-                                            break;
-                                        case 7:
-                                            echo "XXL";
-                                            break;
-                                    }
-                                    ?>
-                                </p>
-                                <div class="container_prix">
-                                    <?php
-                                    if (!is_null($content['type_promotion'])) {
-
-                                        if ($content['type_promotion'] == 0) {
-                                    ?>
-                                            <p class="prix_prom"><?= $content['prix'] ?>€</p>
-                                            <p class="prix_barre"><?= $content['prix_origine'] ?>€</p>
-                                            <p class="tag_solde">-<?= $content['taux_promotion'] ?>%</p>
-
+                        <div class="infos_row mb">
+                            <img class="image_panier" src="<?= $content['miniature'] ?>" alt="">
+                            <div class="infos_article">
+                                <div class="nom_prix">
+                                    <a class="nom_article mb" href="tee-shirts/<?= $content['categorie'] ?>/<?= $content['lien'] ?>"><?= $content['nom'] ?></a>
+                                    <p class="inter_text grey">Coloris : <?= $content['coloris'] ?></p>
+                                    <p class="inter_text grey mb">Taille :
                                         <?php
-                                        } elseif ($content['type_promotion'] == 1) {
+                                        switch ($content['taille']) {
+                                            case 1:
+                                                echo "XXS";
+                                                break;
+                                            case 2:
+                                                echo "XS";
+                                                break;
+                                            case 3:
+                                                echo "S";
+                                                break;
+                                            case 4:
+                                                echo "M";
+                                                break;
+                                            case 5:
+                                                echo "L";
+                                                break;
+                                            case 6:
+                                                echo "XL";
+                                                break;
+                                            case 7:
+                                                echo "XXL";
+                                                break;
+                                        }
                                         ?>
-                                            <p class="prix_prom"><?= $content['prix'] ?>€</p>
-                                            <p class="prix_barre"><?= $content['prix_origine'] ?>€</p>
+                                    </p>
+                                    <div class="container_prix">
+                                        <?php
+                                        if (!is_null($content['type_promotion'])) {
 
+                                            if ($content['type_promotion'] == 0) {
+                                        ?>
+                                                <p class="prix_prom"><?= $content['prix'] ?>€</p>
+                                                <p class="prix_barre"><?= $content['prix_origine'] ?>€</p>
+                                                <p class="tag_solde">-<?= $content['taux_promotion'] ?>%</p>
+
+                                            <?php
+                                            } elseif ($content['type_promotion'] == 1) {
+                                            ?>
+                                                <p class="prix_prom"><?= $content['prix'] ?>€</p>
+                                                <p class="prix_barre"><?= $content['prix_origine'] ?>€</p>
+
+                                            <?php
+                                            }
+                                        } else {
+                                            ?>
+                                            <p class="prix"><?= $content['prix'] ?>€</p>
                                         <?php
                                         }
-                                    } else {
                                         ?>
-                                        <p class="prix"><?= $content['prix'] ?>€</p>
-                                    <?php
-                                    }
-                                    ?>
+                                    </div>
                                 </div>
+                                <div class="counter-container" data-id="<?= $content['id_article'] ?>">
+                                    <button class="counter-button" id="decrement">-</button>
+                                    <p class="counter-value" id="counter"><?= $content['quantite'] ?></p>
+                                    <button class="counter-button" id="increment">+</button>
+                                </div>
+                                <form action="" method="post">
+                                    <button class="link_underline" name="removeArticle" value="<?= $content['id_article'] ?>" type="submit">Supprimer</button>
+                                </form>
                             </div>
-                            <div class="counter-container" data-id="<?= $content['id_article'] ?>">
-                                <button class="counter-button" id="decrement">-</button>
-                                <p class="counter-value" id="counter"><?= $content['quantite'] ?></p>
-                                <button class="counter-button" id="increment">+</button>
-                            </div>
-                            <form action="" method="post">
-                                <button class="link_underline" name="removeArticle" value="<?= $content['id_article'] ?>" type="submit">Supprimer</button>
-                            </form>
                         </div>
-                    </div>
                 <?php
+                    }
                 }
                 ?>
             </div>
@@ -95,13 +97,15 @@
 
         <?php
         $totalPrice = 0;
-        foreach ($_SESSION['basket'] as $item) {
-            $totalPrice += $item['prix'] * $item['quantite'];
+        if (isset($_SESSION['basket'])) {
+            foreach ($_SESSION['basket'] as $item) {
+                $totalPrice += $item['prix'] * $item['quantite'];
+            }
         }
         ?>
 
         <div class="grid_recap">
-            <p class="inter_other2"><?= count($_SESSION['basket']) ?> articles</p>
+            <p class="inter_other2"><?= isset($_SESSION['basket']) ? count($_SESSION['basket']) : "0" ?> articles</p>
             <div class="recap_row">
                 <p class="inter_other2 b">Sous total</p>
                 <p class="inter_other2 b"><?= $totalPrice ?>€</p>
