@@ -449,8 +449,9 @@ header {
 }
 
 .img_banner {
-    height: fit-content;
-    width: fit-content;
+    height: auto;
+    width: 100%;
+    object-fit: cover;
 }
 
 .menu {
